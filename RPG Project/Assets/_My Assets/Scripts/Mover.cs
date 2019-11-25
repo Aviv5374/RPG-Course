@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public class Mover : MonoBehaviour
 {
     [SerializeField] Transform target;
-
-    Ray lastRay;
+   
     Camera mainCamera;
     NavMeshAgent myMeshAgent;
 
@@ -23,9 +22,18 @@ public class Mover : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            lastRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+            MoveToCurser();
+        }        
+    }
+
+    void MoveToCurser()
+    {
+        RaycastHit hitInfo;
+        Ray lastRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        bool hasHit = Physics.Raycast(lastRay,out hitInfo);
+        if (hasHit)
+        {
+            myMeshAgent.destination = hitInfo.point;
         }
-        Debug.DrawRay(lastRay.origin, lastRay.direction * 100, Color.red);
-        myMeshAgent.destination = target.position;      
     }
 }
