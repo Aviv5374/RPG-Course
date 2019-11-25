@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Mover : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    //[SerializeField] Transform target;
    
     Camera mainCamera;
     NavMeshAgent myMeshAgent;
@@ -23,7 +23,7 @@ public class Mover : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             MoveToCurser();
-        }        
+        }       
     }
 
     void MoveToCurser()
