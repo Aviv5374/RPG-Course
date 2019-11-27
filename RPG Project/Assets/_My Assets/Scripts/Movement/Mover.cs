@@ -4,30 +4,21 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Mover : MonoBehaviour
-{
-    //[SerializeField] Transform target;
-   
-    Camera mainCamera;
+{    
     NavMeshAgent myMeshAgent;
     Animator myAnimator;
     List<AnimatorControllerParameter> myAnimtorParameters = new List<AnimatorControllerParameter>();
 
     // Start is called before the first frame update
     void Start()
-    {
-        mainCamera = Camera.main;
+    {       
         myMeshAgent = GetComponent<NavMeshAgent>();
         SetMyAnimator();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            MoveToCurser();
-        }
-
+    {        
         UpdateAnimator();
     }
 
@@ -39,16 +30,10 @@ public class Mover : MonoBehaviour
             myAnimtorParameters.Add(myAnimator.GetParameter(index));
         }
     }
-
-    void MoveToCurser()
+    
+    public void MoveTo(Vector3 destination)
     {
-        RaycastHit hitInfo;
-        Ray lastRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        bool hasHit = Physics.Raycast(lastRay,out hitInfo);
-        if (hasHit)
-        {
-            myMeshAgent.destination = hitInfo.point;            
-        }
+        myMeshAgent.destination = destination;
     }
 
     void UpdateAnimator()
