@@ -1369,6 +1369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_01 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 139386, guid: c2849fd453abd0445a702a035f04ac60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 413494, guid: c2849fd453abd0445a702a035f04ac60, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13
@@ -1825,12 +1829,12 @@ PrefabInstance:
     - target: {fileID: 2582234306674175510, guid: 6fdfde07e6c73f744afa5039611f6b00,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2582234306674175510, guid: 6fdfde07e6c73f744afa5039611f6b00,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.53
+      value: 12.92
       objectReference: {fileID: 0}
     - target: {fileID: 2582234306674175510, guid: 6fdfde07e6c73f744afa5039611f6b00,
         type: 3}
@@ -1904,7 +1908,7 @@ PrefabInstance:
     - target: {fileID: 6860617673911142664, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.53
+      value: 12.92
       objectReference: {fileID: 0}
     - target: {fileID: 6860617673911142664, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
