@@ -19,7 +19,7 @@ namespace RPG.Characters.Player
 
         public void TriggerAttack()
         {
-            myAnimator.SetTrigger(myAnimtorParameters[1].name);
+            myAnimator.SetTrigger(myAnimtorParameters[1].name);            
         }
 
     }

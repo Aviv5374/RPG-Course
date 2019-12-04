@@ -47,6 +47,7 @@ namespace RPG.Control
                 {
                     actionScheduler.StartAction(fighter);//OR mover.StopMoving();????
                     fighter.Attack(target);
+                    //TODO: I want that myAnimator.TriggerAttack() be here, not in fighter.
                 }
                 return true;
             }
