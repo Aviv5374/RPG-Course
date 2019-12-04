@@ -42,7 +42,7 @@ namespace RPG.Control
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    actionScheduler.StartAction(fighter);//OR fighter.CancelAttack();
+                    actionScheduler.StartAction(fighter);//OR mover.StopMoving();????
                     fighter.Attack(target);
                 }
                 return true;
@@ -59,7 +59,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
-                    actionScheduler.StartAction(mover);//OR mover.StopMoving();                    
+                    actionScheduler.StartAction(mover);//OR fighter.CancelAttack();                     
                     mover.StartMoveAction(hitInfo.point);
                 }
                 return true;
