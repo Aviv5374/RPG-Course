@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
 using RPG.Core;
+using RPG.Characters.Player;
 
 namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
         NavMeshAgent myMeshAgent;
-        Animator myAnimator;
-        List<AnimatorControllerParameter> myAnimtorParameters = new List<AnimatorControllerParameter>();
+        PlayerAnimatorHandler myAnimator;
+       
 
         Fighter fighter;
         ActionScheduler actionScheduler;
@@ -20,7 +21,7 @@ namespace RPG.Movement
         void Start()
         {
             myMeshAgent = GetComponent<NavMeshAgent>();
-            SetMyAnimator();
+            myAnimator = GetComponent<PlayerAnimatorHandler>();           
 
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();
@@ -31,16 +32,7 @@ namespace RPG.Movement
         {
             UpdateAnimator();
         }
-
-        void SetMyAnimator()//TODO:FINE Better Method Name
-        {
-            myAnimator = GetComponent<Animator>();
-            for (int index = 0; index < myAnimator.parameterCount; index++)
-            {
-                myAnimtorParameters.Add(myAnimator.GetParameter(index));
-            }
-        }
-
+        
         public void StartMoveAction(Vector3 destination)//?????
         {
             ///actionScheduler.StartAction(this);            
@@ -63,14 +55,9 @@ namespace RPG.Movement
             Vector3 velocity = myMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
             float speed = localVelocity.z;
-            UpdateLocomotion(speed);
+            myAnimator.UpdateLocomotion(speed);
         }
-
-        void UpdateLocomotion(float speed)
-        {
-            myAnimator.SetFloat(myAnimtorParameters[0].name, speed);
-        }
-
+        
         public void CancelAction()
         {
             StopMoving();
