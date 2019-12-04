@@ -24,41 +24,44 @@ namespace RPG.Control
         void Update()
         {
             //DOTO: try to Raycast once for all uses
-            InteractWithCombat();
-            InteractWithMovement();            
+            if (InteractWithCombat()) { return; }
+            if (InteractWithMovement()) { return; }
+            
+           
         }
 
-        private void InteractWithCombat()
+        bool InteractWithCombat()
         {
             RaycastHit[] hits = Physics.RaycastAll(MouseRay);
             foreach (RaycastHit hitInfo in hits)
             {
                 //Debug.Log(hitInfo.transform.gameObject.name);
                 CombatTarget target = hitInfo.transform.GetComponent<CombatTarget>();
+                if (!target) continue;
 
-                if (target && Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     GetComponent<Fighter>().Attack(target);
                 }
-            } 
-        }
-
-        void InteractWithMovement()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
+                return true;
             }
+
+            return false;
         }
 
-        void MoveToCursor()
-        {
+        bool InteractWithMovement()
+        {           
             RaycastHit hitInfo;           
             bool hasHit = Physics.Raycast(MouseRay, out hitInfo);
             if (hasHit)
             {
-                mover.MoveTo(hitInfo.point);
+                if (Input.GetMouseButton(0))
+                {
+                    mover.MoveTo(hitInfo.point);
+                }
+                return true;
             }
+            return false;
         }
     }
 }
