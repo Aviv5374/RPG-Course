@@ -55,7 +55,8 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
-                    mover.MoveTo(hitInfo.point);
+                    fighter.CancelAttack();
+                    mover.StartMoveAction(hitInfo.point);
                 }
                 return true;
             }
