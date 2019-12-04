@@ -35,7 +35,7 @@ namespace RPG.Combat
                 }
                 else
                 {
-                    mover.CancelAction();                   
+                    mover.CancelAction();//OR mover.StopMoving();                    
                 }
             }
         }

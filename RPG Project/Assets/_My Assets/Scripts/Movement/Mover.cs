@@ -53,7 +53,7 @@ namespace RPG.Movement
             myMeshAgent.destination = destination;
         }
 
-        void StopMoving()
+        public void StopMoving()
         {
             myMeshAgent.isStopped = true;            
         }
