@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
+using RPG.Characters.Player;
 
 namespace RPG.Combat
 {
@@ -11,6 +12,7 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
 
         Mover mover;
+        PlayerAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
         Transform target;
 
@@ -19,6 +21,7 @@ namespace RPG.Combat
         void Start()
         {
             mover = GetComponent<Mover>();
+            myAnimator = GetComponent<PlayerAnimatorHandler>();
             actionScheduler = GetComponent<ActionScheduler>();
         }
 
@@ -35,9 +38,15 @@ namespace RPG.Combat
                 }
                 else
                 {
-                    mover.CancelAction();//OR mover.StopMoving();                    
+                    mover.CancelAction();//OR mover.StopMoving();
+                    AttackBehaviour();
                 }
             }
+        }
+
+        void AttackBehaviour()
+        {
+            myAnimator.TriggerAttack();
         }
 
         public void Attack(CombatTarget combatTarget)
@@ -56,5 +65,12 @@ namespace RPG.Combat
         {            
             CancelAttack();
         }
+
+        // Animation Event
+        void Hit()
+        {
+
+        }
+
     }
 }

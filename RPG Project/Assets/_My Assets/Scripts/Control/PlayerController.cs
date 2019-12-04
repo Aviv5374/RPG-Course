@@ -4,6 +4,7 @@ using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
+using RPG.Characters.Player;
 
 namespace RPG.Control
 {
@@ -13,6 +14,7 @@ namespace RPG.Control
         Mover mover;
         Fighter fighter;
         ActionScheduler actionScheduler;
+        PlayerAnimatorHandler myAnimator;
 
         Ray MouseRay { get { return mainCamera.ScreenPointToRay(Input.mousePosition); } }
 
@@ -22,6 +24,7 @@ namespace RPG.Control
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();
+            myAnimator = GetComponent<PlayerAnimatorHandler>();
         }
 
         void Update()

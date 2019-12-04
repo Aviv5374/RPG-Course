@@ -17,7 +17,10 @@ namespace RPG.Characters.Player
             myAnimator.SetFloat(myAnimtorParameters[0].name, speed);
         }
 
-
+        public void TriggerAttack()
+        {
+            myAnimator.SetTrigger(myAnimtorParameters[1].name);
+        }
 
     }
 }
