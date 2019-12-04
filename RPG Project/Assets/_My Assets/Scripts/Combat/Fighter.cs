@@ -11,11 +11,13 @@ namespace RPG.Combat
     {
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] float weaponDamage = 5f;
 
         Mover mover;
         PlayerAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
         Transform target;
+        Health targetHealth;
 
         float timeSinceLastAttack = 0;
 
@@ -58,27 +60,32 @@ namespace RPG.Combat
             }
         }
 
+        // Animation Event
+        void Hit()
+        {
+            if (targetHealth)
+            {
+                targetHealth.TakeDamage(weaponDamage);
+            }
+        }
+
         public void Attack(CombatTarget combatTarget)
         {
             //Debug.Log("Take that you short, squat peasant!");
             //actionScheduler.StartAction(this);
             target = combatTarget.transform;
+            targetHealth = combatTarget.GetComponent<Health>();
         }
 
         public void CancelAttack()
         {            
             target = null;
+            targetHealth = null;
         }
 
         public void CancelAction()
         {            
             CancelAttack();
-        }
-
-        // Animation Event
-        void Hit()
-        {
-
         }
 
     }
