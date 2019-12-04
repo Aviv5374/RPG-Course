@@ -25,9 +25,7 @@ namespace RPG.Control
         {
             //DOTO: try to Raycast once for all uses
             if (InteractWithCombat()) { return; }
-            if (InteractWithMovement()) { return; }
-            
-           
+            if (InteractWithMovement()) { return; }                       
         }
 
         bool InteractWithCombat()

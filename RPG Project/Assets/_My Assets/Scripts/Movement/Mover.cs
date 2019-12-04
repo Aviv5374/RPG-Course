@@ -35,7 +35,13 @@ namespace RPG.Movement
 
         public void MoveTo(Vector3 destination)
         {
+            myMeshAgent.isStopped = false;
             myMeshAgent.destination = destination;
+        }
+
+        public void StopMoving()
+        {
+            myMeshAgent.isStopped = true;            
         }
 
         void UpdateAnimator()
