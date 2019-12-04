@@ -6,7 +6,7 @@ namespace RPG.Core
 {
 	public class ActionScheduler : MonoBehaviour
 	{
-		MonoBehaviour currentAction;
+		IAction currentAction;
 
 		void Awake()
 		{
@@ -23,14 +23,15 @@ namespace RPG.Core
 
 		}
 
-		public void StartAction(MonoBehaviour action)
+		public void StartAction(IAction newAction)
 		{
-			if (currentAction == action) return;
+			if (currentAction == newAction) return;
 			if (currentAction != null)
 			{
 				Debug.Log("Cancelling" + currentAction);
+				currentAction.CancelAction();
 			}
-			currentAction = action;
+			currentAction = newAction;
 		}
 		
 	}

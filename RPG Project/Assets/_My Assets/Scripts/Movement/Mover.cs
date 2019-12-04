@@ -7,7 +7,7 @@ using RPG.Core;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         NavMeshAgent myMeshAgent;
         Animator myAnimator;
@@ -43,8 +43,7 @@ namespace RPG.Movement
 
         public void StartMoveAction(Vector3 destination)//?????
         {
-            ///actionScheduler.StartAction(this);
-            //fighter.CancelAttack();
+            ///actionScheduler.StartAction(this);            
             MoveTo(destination);
         }
 
@@ -54,7 +53,7 @@ namespace RPG.Movement
             myMeshAgent.destination = destination;
         }
 
-        public void StopMoving()
+        void StopMoving()
         {
             myMeshAgent.isStopped = true;            
         }
@@ -70,6 +69,11 @@ namespace RPG.Movement
         void UpdateLocomotion(float speed)
         {
             myAnimator.SetFloat(myAnimtorParameters[0].name, speed);
+        }
+
+        public void CancelAction()
+        {
+            StopMoving();
         }
     }
 }
