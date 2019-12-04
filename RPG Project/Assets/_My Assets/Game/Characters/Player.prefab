@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 51115165348744825}
   - component: {fileID: 7962445579075578291}
   - component: {fileID: 8924733377236955617}
+  - component: {fileID: 5821696653916608951}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -113,6 +114,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e67b0e8ea89e143bf818ceebd0a44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponRange: 2
+--- !u!114 &5821696653916608951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860617673911142668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f1ee62c2905fe4bbbfa19361d4142a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2410378527334850199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,6 +182,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 477758, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.63248575
+      objectReference: {fileID: 0}
+    - target: {fileID: 477758, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.37547126
+      objectReference: {fileID: 0}
     - target: {fileID: 463442, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.5785476
@@ -183,14 +205,6 @@ PrefabInstance:
     - target: {fileID: 463442, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.3754713
-      objectReference: {fileID: 0}
-    - target: {fileID: 477758, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.63248575
-      objectReference: {fileID: 0}
-    - target: {fileID: 477758, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.37547126
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9505156, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}

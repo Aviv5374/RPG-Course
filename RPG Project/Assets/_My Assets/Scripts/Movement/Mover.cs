@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Movement
 {
@@ -12,11 +13,17 @@ namespace RPG.Movement
         Animator myAnimator;
         List<AnimatorControllerParameter> myAnimtorParameters = new List<AnimatorControllerParameter>();
 
+        Fighter fighter;
+        ActionScheduler actionScheduler;
+
         // Start is called before the first frame update
         void Start()
         {
             myMeshAgent = GetComponent<NavMeshAgent>();
             SetMyAnimator();
+
+            fighter = GetComponent<Fighter>();
+            actionScheduler = GetComponent<ActionScheduler>();
         }
 
         // Update is called once per frame
@@ -36,7 +43,8 @@ namespace RPG.Movement
 
         public void StartMoveAction(Vector3 destination)//?????
         {
-            //GetComponent<Fighter>().Cancel();
+            ///actionScheduler.StartAction(this);
+            //fighter.CancelAttack();
             MoveTo(destination);
         }
 

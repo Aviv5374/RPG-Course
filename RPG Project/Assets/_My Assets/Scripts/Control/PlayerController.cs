@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -11,6 +12,7 @@ namespace RPG.Control
         Camera mainCamera;
         Mover mover;
         Fighter fighter;
+        ActionScheduler actionScheduler;
 
         Ray MouseRay { get { return mainCamera.ScreenPointToRay(Input.mousePosition); } }
 
@@ -19,6 +21,7 @@ namespace RPG.Control
             mainCamera = Camera.main;
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
+            actionScheduler = GetComponent<ActionScheduler>();
         }
 
         void Update()
@@ -39,7 +42,8 @@ namespace RPG.Control
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    GetComponent<Fighter>().Attack(target);
+                    actionScheduler.StartAction(fighter);
+                    fighter.Attack(target);
                 }
                 return true;
             }
@@ -55,6 +59,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
+                    actionScheduler.StartAction(mover);
                     fighter.CancelAttack();
                     mover.StartMoveAction(hitInfo.point);
                 }

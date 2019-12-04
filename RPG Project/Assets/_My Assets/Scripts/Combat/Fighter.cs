@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
+using RPG.Core;
 
 namespace RPG.Combat
 {
@@ -10,6 +11,7 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
 
         Mover mover;
+        ActionScheduler actionScheduler;
         Transform target;
 
         bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < weaponRange; } }
@@ -17,6 +19,7 @@ namespace RPG.Combat
         void Start()
         {
             mover = GetComponent<Mover>();
+            actionScheduler = GetComponent<ActionScheduler>();
         }
 
         // Update is called once per frame
@@ -25,7 +28,7 @@ namespace RPG.Combat
             // if (target == null) return;?????
 
             if (target)
-            {              
+            {
                 if (!IsInRange)
                 {
                     mover.MoveTo(target.position);
@@ -40,6 +43,7 @@ namespace RPG.Combat
         public void Attack(CombatTarget combatTarget)
         {
             //Debug.Log("Take that you short, squat peasant!");
+            //actionScheduler.StartAction(this);
             target = combatTarget.transform;
         }
 
