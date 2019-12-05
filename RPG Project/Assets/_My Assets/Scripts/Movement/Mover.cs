@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
 using RPG.Core;
-using RPG.Characters.Player;
+using RPG.Characters;
 
 namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
         NavMeshAgent myMeshAgent;
-        PlayerAnimatorHandler myAnimator;
+        CharacterAnimatorHandler myAnimator;
        
 
         Fighter fighter;
@@ -21,7 +21,7 @@ namespace RPG.Movement
         void Start()
         {
             myMeshAgent = GetComponent<NavMeshAgent>();
-            myAnimator = GetComponent<PlayerAnimatorHandler>();           
+            myAnimator = GetComponent<CharacterAnimatorHandler>();           
 
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();

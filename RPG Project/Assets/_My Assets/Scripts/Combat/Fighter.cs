@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
-using RPG.Characters.Player;
+using RPG.Characters;
 
 namespace RPG.Combat
 {
@@ -14,7 +14,7 @@ namespace RPG.Combat
         [SerializeField] float weaponDamage = 5f;
 
         Mover mover;
-        PlayerAnimatorHandler myAnimator;
+        CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
         Transform target;
         Health targetHealth;
@@ -26,7 +26,7 @@ namespace RPG.Combat
         void Start()
         {
             mover = GetComponent<Mover>();
-            myAnimator = GetComponent<PlayerAnimatorHandler>();
+            myAnimator = GetComponent<CharacterAnimatorHandler>();
             actionScheduler = GetComponent<ActionScheduler>();
         }
 

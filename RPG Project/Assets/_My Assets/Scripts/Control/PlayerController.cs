@@ -14,7 +14,7 @@ namespace RPG.Control
         Mover mover;
         Fighter fighter;
         ActionScheduler actionScheduler;
-        PlayerAnimatorHandler myAnimator;
+        //PlayerAnimatorHandler myAnimator;????
 
         Ray MouseRay { get { return mainCamera.ScreenPointToRay(Input.mousePosition); } }
 
@@ -24,7 +24,7 @@ namespace RPG.Control
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();
-            myAnimator = GetComponent<PlayerAnimatorHandler>();
+            //myAnimator = GetComponent<PlayerAnimatorHandler>();?????
         }
 
         void Update()

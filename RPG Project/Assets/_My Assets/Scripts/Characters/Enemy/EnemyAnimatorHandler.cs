@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
 
-namespace RPG.Characters.Player
+namespace RPG.Characters.Enemy
 {
-    public class PlayerAnimatorHandler : CharacterAnimatorHandler
+    public class EnemyAnimatorHandler : CharacterAnimatorHandler
     {
         protected override void Start()
         {
@@ -19,7 +19,7 @@ namespace RPG.Characters.Player
 
         //public void TriggerAttack()
         //{
-        //    myAnimator.SetTrigger(myAnimtorParameters[1].name);            
+        //    myAnimator.SetTrigger(myAnimtorParameters[1].name);
         //}
 
     }
