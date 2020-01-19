@@ -10,6 +10,9 @@ namespace RPG.Control
 {
     public class EnemyController : MonoBehaviour
     {
+        EnemyAnimatorHandler myAnimator;//????
+        Health myHealth;
+
         void Awake()
         {
 
@@ -17,12 +20,16 @@ namespace RPG.Control
 
         void Start()
         {
-
+            myAnimator = GetComponent<EnemyAnimatorHandler>();//?????
+            myHealth = GetComponent<Health>(); 
         }
 
         void Update()
         {
-
+            //if (myHealth.HealthAmount <= 0)
+            //{
+            //    myAnimator.TriggerDeath();
+            //}
         }
 
     }

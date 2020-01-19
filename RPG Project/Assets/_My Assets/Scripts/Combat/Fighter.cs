@@ -67,6 +67,11 @@ namespace RPG.Combat
             {
                 targetHealth.TakeDamage(weaponDamage);
             }
+
+            if (targetHealth.HealthPoints <= 0)
+            {
+                CancelAttack();
+            }
         }
 
         public void Attack(CombatTarget combatTarget)

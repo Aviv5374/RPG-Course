@@ -9,7 +9,7 @@ namespace RPG.Characters
     {
         protected override void Start()
         {
-            base.Start();
+            base.Start();            
         }
 
         public void UpdateLocomotion(float speed)

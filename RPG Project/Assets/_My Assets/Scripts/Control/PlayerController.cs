@@ -39,7 +39,7 @@ namespace RPG.Control
             RaycastHit[] hits = Physics.RaycastAll(MouseRay);
             foreach (RaycastHit hitInfo in hits)
             {
-                //Debug.Log(hitInfo.transform.gameObject.name);
+                //Debug.Log("print from InteractWithCombat() the hitInfo of " + hitInfo.transform.gameObject.name);
                 CombatTarget target = hitInfo.transform.GetComponent<CombatTarget>();
                 if (!target) continue;
 
