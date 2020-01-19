@@ -39,6 +39,8 @@ namespace RPG.Combat
 
             if (target)
             {
+                if (targetHealth.HealthPoints <= 0) return;
+
                 if (!IsInRange)
                 {
                     mover.MoveTo(target.position);
@@ -66,12 +68,7 @@ namespace RPG.Combat
             if (targetHealth)
             {
                 targetHealth.TakeDamage(weaponDamage);
-            }
-
-            if (targetHealth.HealthPoints <= 0)
-            {
-                CancelAttack();
-            }
+            }            
         }
 
         public void Attack(CombatTarget combatTarget)
@@ -83,7 +80,8 @@ namespace RPG.Combat
         }
 
         public void CancelAttack()
-        {            
+        {
+            myAnimator.TriggerStopAttack();
             target = null;
             targetHealth = null;
         }
