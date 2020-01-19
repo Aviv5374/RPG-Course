@@ -41,7 +41,7 @@ namespace RPG.Control
             {
                 //Debug.Log("print from InteractWithCombat() the hitInfo of " + hitInfo.transform.gameObject.name);
                 CombatTarget target = hitInfo.transform.GetComponent<CombatTarget>();
-                if (!target) continue;
+                if (!fighter.CanAttack(target)) continue;
 
                 if (Input.GetMouseButtonDown(0))
                 {

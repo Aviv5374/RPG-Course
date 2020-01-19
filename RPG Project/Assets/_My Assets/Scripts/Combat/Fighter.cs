@@ -22,7 +22,7 @@ namespace RPG.Combat
         float timeSinceLastAttack = 0;
 
         bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < weaponRange; } }
-
+        
         void Start()
         {
             mover = GetComponent<Mover>();
@@ -70,6 +70,13 @@ namespace RPG.Combat
             {
                 targetHealth.TakeDamage(weaponDamage);
             }            
+        }
+
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            if (!combatTarget) { return false; }
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return targetToTest && targetToTest.HealthPoints > 0;
         }
 
         public void Attack(CombatTarget combatTarget)
