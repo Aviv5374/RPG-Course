@@ -58,9 +58,16 @@ namespace RPG.Combat
             transform.LookAt(target);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
+                //TriggerAttack();???
                 myAnimator.TriggerAttack();
                 timeSinceLastAttack = 0;
             }
+        }
+
+        void TriggerAttack()
+        {
+            myAnimator.ResetStopAttackTrigger();
+            myAnimator.TriggerAttack();
         }
 
         // Animation Event
@@ -76,7 +83,7 @@ namespace RPG.Combat
         {
             if (!combatTarget) { return false; }
             Health targetToTest = combatTarget.GetComponent<Health>();
-            return targetToTest && targetToTest.HealthPoints > 0;
+            return targetToTest && targetToTest.HealthPoints > 0;//OR targetToTest.IsAlive?????
         }
 
         public void Attack(CombatTarget combatTarget)
@@ -85,11 +92,24 @@ namespace RPG.Combat
             //actionScheduler.StartAction(this);
             target = combatTarget.transform;
             targetHealth = combatTarget.GetComponent<Health>();
+            myAnimator.ResetStopAttackTrigger();
         }
 
         public void CancelAttack()
         {
+            StopAttack();
+            timeSinceLastAttack = 0;
+            ResetTarget();
+        }
+
+        void StopAttack()
+        {
+            myAnimator.ResetAttackTrigger();
             myAnimator.TriggerStopAttack();
+        }
+
+        void ResetTarget()
+        {
             target = null;
             targetHealth = null;
         }

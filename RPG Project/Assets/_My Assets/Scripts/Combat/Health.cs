@@ -9,21 +9,23 @@ namespace RPG.Combat
     {
         [SerializeField] float healthPoints = 100f;
         CharacterAnimatorHandler myAnimator;
+
         public float HealthPoints { get { return healthPoints; } }
+        public bool IsAlive { get { return healthPoints > 0; } }//????
+        public bool IsDead { get { return healthPoints <= 0; } }//????
 
         void Start()
         {
             myAnimator = GetComponent<CharacterAnimatorHandler>();
         }
 
-
         public void TakeDamage(float damage)
         {
-            if (healthPoints > 0)
+            if (IsAlive)
             {
                 healthPoints = Mathf.Max(healthPoints - damage, 0);
                 Debug.Log(name + " health " + healthPoints);
-                if (healthPoints <= 0)
+                if (IsDead)
                 {
                     myAnimator.TriggerDeath();//????
                 }

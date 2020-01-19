@@ -22,9 +22,19 @@ namespace RPG.Characters
             myAnimator.SetTrigger(myAnimtorParameters[1].name);
         }
 
+        public void ResetAttackTrigger()
+        {
+            myAnimator.ResetTrigger(myAnimtorParameters[1].name);
+        }
+
         public void TriggerStopAttack()
         {
             myAnimator.SetTrigger(myAnimtorParameters[2].name);
+        }
+
+        public void ResetStopAttackTrigger()
+        {
+            myAnimator.ResetTrigger(myAnimtorParameters[2].name);
         }
 
         public void TriggerDeath()
