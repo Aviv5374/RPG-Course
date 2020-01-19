@@ -55,6 +55,7 @@ namespace RPG.Combat
 
         void AttackBehaviour()
         {
+            transform.LookAt(target);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 myAnimator.TriggerAttack();
