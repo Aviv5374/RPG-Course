@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Movement;
 using RPG.Combat;
 
 namespace RPG.Control
@@ -10,22 +11,23 @@ namespace RPG.Control
         [SerializeField] float chaseDistance = 5f;
 
         PlayerController player;
+        Mover mover;
         Health health;
         Fighter fighter;
 
+        Vector3 guardPosition;
+
         float DistanceFromPlayer { get { return Vector3.Distance(this.transform.position, player.transform.position); } }
         bool InAttackRangeOfPlayer { get { return DistanceFromPlayer <= chaseDistance; } }
-
-        void Awake()
-        {
-
-        }
-
+        
         void Start()
         {
             player = FindObjectOfType<PlayerController>();
+            mover = GetComponent<Mover>();
             health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
+
+            guardPosition = transform.position;
         }
 
         void Update()
@@ -44,6 +46,7 @@ namespace RPG.Control
             else
             {
                 fighter.CancelAttack();
+                mover.MoveTo(guardPosition);//OR mover.StartMoveAction(guardPosition);
             }
         }
 
