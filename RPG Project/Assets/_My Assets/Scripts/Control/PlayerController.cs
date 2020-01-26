@@ -14,9 +14,12 @@ namespace RPG.Control
         Mover mover;
         Fighter fighter;
         ActionScheduler actionScheduler;
+        CombatTarget myCombatTarget;
         //PlayerAnimatorHandler myAnimator;????
 
         Ray MouseRay { get { return mainCamera.ScreenPointToRay(Input.mousePosition); } }
+
+        public CombatTarget CombatTarget { get { return myCombatTarget; } }
 
         void Start()
         {
@@ -24,6 +27,7 @@ namespace RPG.Control
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();
+            myCombatTarget = GetComponent<CombatTarget>();
             //myAnimator = GetComponent<PlayerAnimatorHandler>();?????
         }
 
