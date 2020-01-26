@@ -19,7 +19,7 @@ namespace RPG.Combat
         Transform target;
         Health targetHealth;
 
-        float timeSinceLastAttack = 0;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < weaponRange; } }
         
@@ -60,7 +60,7 @@ namespace RPG.Combat
             {
                 //TriggerAttack();???
                 myAnimator.TriggerAttack();
-                timeSinceLastAttack = 0;
+                timeSinceLastAttack = Mathf.Infinity;
             }
         }
 
@@ -98,7 +98,7 @@ namespace RPG.Combat
         public void CancelAttack()
         {
             StopAttack();
-            timeSinceLastAttack = 0;
+            timeSinceLastAttack = Mathf.Infinity;
             ResetTarget();
         }
 

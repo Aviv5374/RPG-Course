@@ -7,32 +7,27 @@ namespace RPG.Core
 	public class ActionScheduler : MonoBehaviour
 	{
 		IAction currentAction;
-
-		void Awake()
-		{
-
-		}
-		
+				
 		void Start()
 		{
 
 		}
-		
-		void Update()
-		{
-
-		}
-
+				
 		public void StartAction(IAction newAction)
 		{
 			if (currentAction == newAction) return;
 			if (currentAction != null)
 			{
-				Debug.Log("Cancelling" + currentAction);
+				Debug.Log("Cancelling" + currentAction + " of " + name);
 				currentAction.CancelAction();
 			}
 			currentAction = newAction;
 		}
-		
+
+		public void CancelCurrentAction()
+		{
+			StartAction(null);
+		}
+
 	}
 }

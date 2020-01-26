@@ -12,6 +12,7 @@ namespace RPG.Control
     {
         Camera mainCamera;
         Mover mover;
+        Health health;
         Fighter fighter;
         ActionScheduler actionScheduler;
         CombatTarget myCombatTarget;
@@ -25,6 +26,7 @@ namespace RPG.Control
         {
             mainCamera = Camera.main;
             mover = GetComponent<Mover>();
+            health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();
             myCombatTarget = GetComponent<CombatTarget>();
@@ -33,6 +35,8 @@ namespace RPG.Control
 
         void Update()
         {
+            if (health.IsDead) return;
+
             //DOTO: try to Raycast once for all uses
             if (InteractWithCombat()) { return; }
             if (InteractWithMovement()) { return; }                       

@@ -12,8 +12,8 @@ namespace RPG.Movement
     {
         NavMeshAgent myMeshAgent;
         CharacterAnimatorHandler myAnimator;
-       
 
+        Health health;
         Fighter fighter;
         ActionScheduler actionScheduler;
 
@@ -21,7 +21,9 @@ namespace RPG.Movement
         void Start()
         {
             myMeshAgent = GetComponent<NavMeshAgent>();
-            myAnimator = GetComponent<CharacterAnimatorHandler>();           
+            myAnimator = GetComponent<CharacterAnimatorHandler>();
+
+            health = GetComponent<Health>();
 
             fighter = GetComponent<Fighter>();
             actionScheduler = GetComponent<ActionScheduler>();
@@ -30,6 +32,7 @@ namespace RPG.Movement
         // Update is called once per frame
         void Update()
         {
+            myMeshAgent.enabled = health.IsAlive;
             UpdateAnimator();
         }
         

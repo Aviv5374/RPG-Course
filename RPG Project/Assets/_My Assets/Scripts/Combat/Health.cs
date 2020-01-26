@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Characters;
+using RPG.Core;
 
 namespace RPG.Combat
 {
@@ -9,6 +10,7 @@ namespace RPG.Combat
     {
         [SerializeField] float healthPoints = 100f;
         CharacterAnimatorHandler myAnimator;
+        ActionScheduler actionScheduler;
 
         public float HealthPoints { get { return healthPoints; } }
         public bool IsAlive { get { return healthPoints > 0; } }//????
@@ -17,6 +19,7 @@ namespace RPG.Combat
         void Start()
         {
             myAnimator = GetComponent<CharacterAnimatorHandler>();
+            actionScheduler = GetComponent<ActionScheduler>();
         }
 
         public void TakeDamage(float damage)
@@ -28,6 +31,7 @@ namespace RPG.Combat
                 if (IsDead)
                 {
                     myAnimator.TriggerDeath();//????
+                    actionScheduler.CancelCurrentAction();//?????
                 }
             }                           
         }
