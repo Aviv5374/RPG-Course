@@ -48,17 +48,17 @@ namespace RPG.Movement
             myMeshAgent.destination = destination;
         }
 
-        public void StopMoving()
-        {
-            myMeshAgent.isStopped = true;            
-        }
-
         void UpdateAnimator()
         {
             Vector3 velocity = myMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
             float speed = localVelocity.z;
             myAnimator.UpdateLocomotion(speed);
+        }
+
+        public void StopMoving()
+        {
+            myMeshAgent.isStopped = true;            
         }
         
         public void CancelAction()

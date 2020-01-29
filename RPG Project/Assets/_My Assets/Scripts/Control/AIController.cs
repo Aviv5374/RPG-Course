@@ -11,7 +11,8 @@ namespace RPG.Control
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 3.5f;
         [SerializeField] PatrolPath patrolPath;
-        [SerializeField] float waypointTolerance = 1f;
+        [SerializeField] float waypointTolerance = 0.51f;
+        [SerializeField] float waypointDwellTime = 2.75f;
 
         PlayerController player;
         Mover mover;
@@ -20,11 +21,17 @@ namespace RPG.Control
 
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
+        float timeSinceArrivedAtGuardPos = Mathf.Infinity;
         int currentWaypointIndex = 0;
 
         float DistanceFromPlayer { get { return Vector3.Distance(this.transform.position, player.transform.position); } }
         bool InAttackRangeOfPlayer { get { return DistanceFromPlayer <= chaseDistance; } }
         Vector3 CurrentWaypoint { get { return patrolPath.GetWayPointPos(currentWaypointIndex); } }
+        bool IfLoseSightOfPlayer { get { return timeSinceLastSawPlayer < suspicionTime; } }
+        bool OnGuardDuty { get { return AtGuardPosition() && timeSinceArrivedAtGuardPos < waypointDwellTime; } }
+
+
+        //bool IsCheckingSometingSuspicion { get}
 
         void Start()
         {
@@ -59,7 +66,7 @@ namespace RPG.Control
                 AttackBehaviour();
 
             }
-            else if (timeSinceLastSawPlayer < suspicionTime)
+            else if (IfLoseSightOfPlayer || OnGuardDuty)
             {
                 SuspicionBehaviour();
             }
@@ -75,7 +82,13 @@ namespace RPG.Control
                 }
             }
 
+            UpdateTimers();
+        }
+
+        void UpdateTimers()
+        {
             timeSinceLastSawPlayer += Time.deltaTime;
+            timeSinceArrivedAtGuardPos += Time.deltaTime;
         }
 
         void AttackBehaviour()
@@ -88,6 +101,7 @@ namespace RPG.Control
         void SuspicionBehaviour()
         {
             fighter.CancelAttack();//OR GetComponent<ActionScheduler>().CancelCurrentAction();
+            mover.StopMoving();
             //CanDo: Add Animation.
         }
 
@@ -99,20 +113,20 @@ namespace RPG.Control
 
         void PotrolBehaviour()
         {
-            Vector3 nextPosition;
 
-            if (AtWaypoint())
+            if (AtGuardPosition())
             {
                 CycleWaypoint();
+                timeSinceArrivedAtGuardPos = 0;
             }
-            nextPosition = CurrentWaypoint;
+            guardPosition = CurrentWaypoint;
 
-            mover.MoveTo(nextPosition);//OR mover.StartMoveAction(guardPosition);
+            GuardBehaviour();
         }
 
-        bool AtWaypoint()
+        bool AtGuardPosition()
         {
-            float distanceToWaypoint = Vector3.Distance(transform.position, CurrentWaypoint);
+            float distanceToWaypoint = Vector3.Distance(transform.position, guardPosition);
             return distanceToWaypoint < waypointTolerance;
         }
 

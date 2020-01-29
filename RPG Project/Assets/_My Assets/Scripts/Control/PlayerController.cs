@@ -51,7 +51,7 @@ namespace RPG.Control
                 CombatTarget target = hitInfo.transform.GetComponent<CombatTarget>();
                 if (!fighter.CanAttack(target)) continue;
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
                     actionScheduler.StartAction(fighter);//OR mover.StopMoving();????
                     fighter.Attack(target);
