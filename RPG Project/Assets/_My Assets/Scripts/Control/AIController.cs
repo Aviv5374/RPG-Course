@@ -9,6 +9,7 @@ namespace RPG.Control
     public class AIController : MonoBehaviour
     {
         [SerializeField] float chaseDistance = 5f;
+        [SerializeField] float suspicionTime = 3.5f;
 
         PlayerController player;
         Mover mover;
@@ -16,6 +17,7 @@ namespace RPG.Control
         Fighter fighter;
 
         Vector3 guardPosition;
+        float timeSinceLastSawPlayer = Mathf.Infinity;
 
         float DistanceFromPlayer { get { return Vector3.Distance(this.transform.position, player.transform.position); } }
         bool InAttackRangeOfPlayer { get { return DistanceFromPlayer <= chaseDistance; } }
@@ -32,22 +34,50 @@ namespace RPG.Control
 
         void Update()
         {
-            if (health.IsDead) 
+            if (health.IsDead)
             {
                 fighter.CancelAttack();
-                return; 
+                return;
             }
 
+            MainBehavior();
+        }
+
+        void MainBehavior()
+        {
             if (InAttackRangeOfPlayer && fighter.CanAttack(player.CombatTarget))
             {
-                //Debug.Log(name + " can chase player!!!");
-                fighter.Attack(player.CombatTarget);
+                AttackBehaviour();
+
+            }
+            else if (timeSinceLastSawPlayer < suspicionTime)
+            {
+                SuspicionBehaviour();
             }
             else
             {
-                fighter.CancelAttack();
-                mover.MoveTo(guardPosition);//OR mover.StartMoveAction(guardPosition);
+                GuardBehaviour();
             }
+
+            timeSinceLastSawPlayer += Time.deltaTime;
+        }
+
+        void AttackBehaviour()
+        {
+            timeSinceLastSawPlayer = 0;
+            //Debug.Log(name + " can chase player!!!");
+            fighter.Attack(player.CombatTarget);
+        }
+
+        void SuspicionBehaviour()
+        {
+            fighter.CancelAttack();//OR GetComponent<ActionScheduler>().CancelCurrentAction();
+            //CanDo: Add Animation.
+        }
+
+        void GuardBehaviour()
+        {
+            mover.MoveTo(guardPosition);//OR mover.StartMoveAction(guardPosition);
         }
 
         void OnDrawGizmosSelected()
