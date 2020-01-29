@@ -78,6 +78,7 @@ namespace RPG.Control
         void GuardBehaviour()
         {
             mover.MoveTo(guardPosition);//OR mover.StartMoveAction(guardPosition);
+            //CanDo: Add Animation.
         }
 
         void OnDrawGizmosSelected()
