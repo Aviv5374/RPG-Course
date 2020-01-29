@@ -10,6 +10,8 @@ namespace RPG.Control
     {
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 3.5f;
+        [SerializeField] PatrolPath patrolPath;
+        [SerializeField] float waypointTolerance = 1f;
 
         PlayerController player;
         Mover mover;
@@ -18,16 +20,23 @@ namespace RPG.Control
 
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
+        int currentWaypointIndex = 0;
 
         float DistanceFromPlayer { get { return Vector3.Distance(this.transform.position, player.transform.position); } }
         bool InAttackRangeOfPlayer { get { return DistanceFromPlayer <= chaseDistance; } }
-        
+        Vector3 CurrentWaypoint { get { return patrolPath.GetWayPointPos(currentWaypointIndex); } }
+
         void Start()
         {
             player = FindObjectOfType<PlayerController>();
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
+
+            if (patrolPath)
+            {
+                transform.position = CurrentWaypoint;
+            }
 
             guardPosition = transform.position;
         }
@@ -56,7 +65,14 @@ namespace RPG.Control
             }
             else
             {
-                GuardBehaviour();
+                if (patrolPath)
+                {
+                    PotrolBehaviour();
+                }
+                else
+                {
+                    GuardBehaviour();
+                }
             }
 
             timeSinceLastSawPlayer += Time.deltaTime;
@@ -81,11 +97,36 @@ namespace RPG.Control
             //CanDo: Add Animation.
         }
 
+        void PotrolBehaviour()
+        {
+            Vector3 nextPosition;
+
+            if (AtWaypoint())
+            {
+                CycleWaypoint();
+            }
+            nextPosition = CurrentWaypoint;
+
+            mover.MoveTo(nextPosition);//OR mover.StartMoveAction(guardPosition);
+        }
+
+        bool AtWaypoint()
+        {
+            float distanceToWaypoint = Vector3.Distance(transform.position, CurrentWaypoint);
+            return distanceToWaypoint < waypointTolerance;
+        }
+
+        void CycleWaypoint()
+        {
+            currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+        }
+        
         void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.magenta;            
+            Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
 
     }
 }
+

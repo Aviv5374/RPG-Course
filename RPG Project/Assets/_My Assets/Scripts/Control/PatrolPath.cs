@@ -5,7 +5,7 @@ using UnityEngine;
 namespace RPG.Control
 {
     //[ExecuteInEditMode]????????
-    public class PotrolPath : MonoBehaviour
+    public class PatrolPath : MonoBehaviour
     {
         [SerializeField] float waypointGizmoRadius = 0.5f;
 
@@ -31,12 +31,12 @@ namespace RPG.Control
             }
         }
 
-        Vector3 GetWayPointPos(int i)
+        public Vector3 GetWayPointPos(int i)
         {
             return transform.GetChild(i).position;
         }
 
-        int GetNextIndex(int index)
+        public int GetNextIndex(int index)
         {
             if (index < transform.childCount-1)
             {
