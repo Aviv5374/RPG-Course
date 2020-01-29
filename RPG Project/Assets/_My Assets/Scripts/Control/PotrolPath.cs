@@ -23,11 +23,28 @@ namespace RPG.Control
 
         private void OnDrawGizmos()
         {
-            for (int i = 0; i < transform.childCount; i++)
+            for (int index = 0; index < transform.childCount; index++)
             {
-                Transform wayPoint = transform.GetChild(i);
                 //Gizmos.color = Color.white;
-                Gizmos.DrawSphere(wayPoint.position, waypointGizmoRadius);
+                Gizmos.DrawSphere(GetWayPointPos(index), waypointGizmoRadius);
+                Gizmos.DrawLine(GetWayPointPos(index), GetWayPointPos(GetNextIndex(index)));
+            }
+        }
+
+        Vector3 GetWayPointPos(int i)
+        {
+            return transform.GetChild(i).position;
+        }
+
+        int GetNextIndex(int index)
+        {
+            if (index < transform.childCount-1)
+            {
+                return index + 1;
+            }
+            else
+            {
+                return 0;
             }
         }
 
