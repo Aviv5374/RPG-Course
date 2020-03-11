@@ -109,7 +109,12 @@ PrefabInstance:
     - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
       propertyPath: healthPoints
-      value: 30
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924733377236955617, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: weaponDamage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4810c451e0357946b8dea19253ab382, type: 3}
