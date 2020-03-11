@@ -24,7 +24,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd65e996a3f9d1443bd73719322cbfa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 5
+  chaseDistance: 4.75
   suspicionTime: 3.5
   patrolPath: {fileID: 0}
   waypointTolerance: 0.5
@@ -36,10 +36,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6860617673911142668, guid: e4810c451e0357946b8dea19253ab382,
+    - target: {fileID: 4581906468820398814, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
-      propertyPath: m_Name
-      value: Enemy
+      propertyPath: m_Speed
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6860617673911142664, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
@@ -96,10 +96,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4581906468820398814, guid: e4810c451e0357946b8dea19253ab382,
+    - target: {fileID: 6860617673911142668, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
-      propertyPath: m_Speed
-      value: 3.5
+      propertyPath: m_Name
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
