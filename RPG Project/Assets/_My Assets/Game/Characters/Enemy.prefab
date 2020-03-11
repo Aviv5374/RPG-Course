@@ -24,7 +24,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd65e996a3f9d1443bd73719322cbfa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 4.75
+  chaseDistance: 4.25
   suspicionTime: 3.5
   patrolPath: {fileID: 0}
   waypointTolerance: 0.5
@@ -110,6 +110,16 @@ PrefabInstance:
         type: 3}
       propertyPath: healthPoints
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962445579075578291, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962445579075578291, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: runSpeed
+      value: 5.25
       objectReference: {fileID: 0}
     - target: {fileID: 8924733377236955617, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}

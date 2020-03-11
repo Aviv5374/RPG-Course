@@ -95,7 +95,7 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0;
             //Debug.Log(name + " can chase player!!!");
-            fighter.Attack(player.CombatTarget);
+            fighter.Attack(player.CombatTarget, false, true);
         }
 
         void SuspicionBehaviour()

@@ -10,6 +10,10 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
+        [SerializeField] float injuredSpeed = 1.5f;
+        [SerializeField] float walkSpeed = 4f;
+        [SerializeField] float runSpeed = 6f;
+
         NavMeshAgent myMeshAgent;
         CharacterAnimatorHandler myAnimator;
 
@@ -21,6 +25,8 @@ namespace RPG.Movement
         void Start()
         {
             myMeshAgent = GetComponent<NavMeshAgent>();
+            myMeshAgent.speed = walkSpeed;
+
             myAnimator = GetComponent<CharacterAnimatorHandler>();
 
             health = GetComponent<Health>();
@@ -42,10 +48,27 @@ namespace RPG.Movement
             MoveTo(destination);
         }
 
-        public void MoveTo(Vector3 destination)
+        public void MoveTo(Vector3 destination, bool isInjured = false, bool isChasing = false)
         {
             myMeshAgent.isStopped = false;
             myMeshAgent.destination = destination;
+            SetAgentSpeed(isInjured, isChasing);
+        }
+
+        private void SetAgentSpeed(bool isInjured, bool isChasing)
+        {
+            if (isChasing)
+            {
+                myMeshAgent.speed = runSpeed;
+            }
+            else if (isInjured)
+            {
+                myMeshAgent.speed = injuredSpeed;
+            }
+            else
+            {
+                myMeshAgent.speed = walkSpeed;
+            }
         }
 
         void UpdateAnimator()
@@ -58,6 +81,7 @@ namespace RPG.Movement
 
         public void StopMoving()
         {
+            myMeshAgent.speed = walkSpeed;
             myMeshAgent.isStopped = true;            
         }
         

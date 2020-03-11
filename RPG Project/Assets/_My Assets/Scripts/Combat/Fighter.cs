@@ -19,6 +19,8 @@ namespace RPG.Combat
         Transform target;
         Health targetHealth;
 
+        bool isChasing = false;
+        bool isInjured = false;
         float timeSinceLastAttack = Mathf.Infinity;
 
         bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < weaponRange; } }
@@ -28,6 +30,8 @@ namespace RPG.Combat
             mover = GetComponent<Mover>();
             myAnimator = GetComponent<CharacterAnimatorHandler>();
             actionScheduler = GetComponent<ActionScheduler>();
+
+            isChasing = false;
         }
 
         // Update is called once per frame
@@ -43,7 +47,7 @@ namespace RPG.Combat
 
                 if (!IsInRange)
                 {
-                    mover.MoveTo(target.position);
+                    mover.MoveTo(target.position, isInjured, isChasing);
                 }
                 else
                 {
@@ -86,13 +90,16 @@ namespace RPG.Combat
             return targetToTest && targetToTest.HealthPoints > 0;//OR targetToTest.IsAlive?????
         }
 
-        public void Attack(CombatTarget combatTarget)
+        //Right now only enemies are chasing the player, what if something else is chasing her?        
+        public void Attack(CombatTarget combatTarget, bool isInjured = false, bool isChasing = false)
         {
             //Debug.Log("Take that you short, squat peasant!");
             //actionScheduler.StartAction(this);
             target = combatTarget.transform;
             targetHealth = combatTarget.GetComponent<Health>();
             myAnimator.ResetStopAttackTrigger();
+            this.isInjured = isInjured;
+            this.isChasing = isChasing;
         }
 
         public void CancelAttack()

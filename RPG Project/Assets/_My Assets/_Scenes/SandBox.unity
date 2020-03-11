@@ -3723,36 +3723,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 395513942}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &401000414
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 401000415}
-  m_Layer: 0
-  m_Name: Waypoint (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &401000415
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401000414}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.64, y: 0, z: -11.35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1334775442}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &425828233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5044,6 +5014,11 @@ PrefabInstance:
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 6644640224475301476}
+    - target: {fileID: 4779828702506537700, guid: b5aaf5ea8da97924880506c6041dfda5,
+        type: 3}
+      propertyPath: waypointDwellTime
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6307054093603317976, guid: b5aaf5ea8da97924880506c6041dfda5,
         type: 3}
       propertyPath: m_Name
@@ -10598,7 +10573,6 @@ Transform:
   - {fileID: 261410627}
   - {fileID: 1422853455}
   - {fileID: 839056075}
-  - {fileID: 401000415}
   m_Father: {fileID: 938007123}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11146,6 +11120,11 @@ PrefabInstance:
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 828347747}
+    - target: {fileID: 4779828702506537700, guid: b5aaf5ea8da97924880506c6041dfda5,
+        type: 3}
+      propertyPath: waypointDwellTime
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6307054093603317976, guid: b5aaf5ea8da97924880506c6041dfda5,
         type: 3}
       propertyPath: m_Name

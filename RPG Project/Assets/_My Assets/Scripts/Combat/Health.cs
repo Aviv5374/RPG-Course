@@ -27,7 +27,7 @@ namespace RPG.Combat
             if (IsAlive)
             {
                 healthPoints = Mathf.Max(healthPoints - damage, 0);
-                Debug.Log(name + " health " + healthPoints);
+                //Debug.Log(name + " health " + healthPoints);
                 if (IsDead)
                 {
                     myAnimator.TriggerDeath();//????

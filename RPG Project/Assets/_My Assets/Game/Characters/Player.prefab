@@ -89,6 +89,16 @@ PrefabInstance:
       propertyPath: healthPoints
       value: 125
       objectReference: {fileID: 0}
+    - target: {fileID: 7962445579075578291, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 5.662317
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962445579075578291, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: runSpeed
+      value: 5.662317
+      objectReference: {fileID: 0}
     - target: {fileID: 8924733377236955617, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
       propertyPath: weaponDamage
