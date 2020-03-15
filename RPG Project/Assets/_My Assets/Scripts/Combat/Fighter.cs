@@ -86,8 +86,9 @@ namespace RPG.Combat
         public bool CanAttack(CombatTarget combatTarget)
         {
             if (!combatTarget) { return false; }
-            Health targetToTest = combatTarget.GetComponent<Health>();
-            return targetToTest && targetToTest.HealthPoints > 0;//OR targetToTest.IsAlive?????
+            Health targetHealth = combatTarget.GetComponent<Health>();
+            string targetName = combatTarget.name;            
+            return targetHealth && targetHealth.HealthPoints > 0/*OR targetHealth.IsAlive?????*/ && targetName != this.name;
         }
 
         //Right now only enemies are chasing the player, what if something else is chasing her?        

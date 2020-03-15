@@ -56,7 +56,7 @@ namespace RPG.Control
                 return;
             }
 
-            MainBehavior();
+            MainBehavior();            
         }
 
         void MainBehavior()
