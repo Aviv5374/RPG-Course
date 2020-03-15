@@ -108,6 +108,7 @@ namespace RPG.Combat
             StopAttack();
             timeSinceLastAttack = Mathf.Infinity;
             ResetTarget();
+            //mover.StopMoving();?????
         }
 
         void StopAttack()

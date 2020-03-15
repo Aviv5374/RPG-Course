@@ -78,5 +78,20 @@ namespace RPG.Control
             }
             return false;
         }
+
+        public void StopMoving()
+        {
+            mover.StopMoving();
+        }
+
+        public void CancelAttack()
+        {
+            fighter.CancelAttack();
+        }
+
+        public void CancelCurrentAction()
+        {
+            actionScheduler.CancelCurrentAction();
+        }
     }
 }
