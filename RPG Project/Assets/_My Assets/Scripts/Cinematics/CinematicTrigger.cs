@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -9,6 +10,8 @@ namespace RPG.Cinematics
     [RequireComponent(typeof(PlayableDirector))]
     public class CinematicTrigger : MonoBehaviour
     {
+        public event Action<float> eventTest;
+
         [SerializeField] int maxTimeCinematicCanTrigger = 1;
         int sumTimeCinematicTrigger = 0;
         //OR
@@ -16,11 +19,11 @@ namespace RPG.Cinematics
 
         PlayableDirector myPlayableDirector;
 
-
         // Start is called before the first frame update
         void Start()
         {
             myPlayableDirector = GetComponent<PlayableDirector>();
+            Invoke("EventTest", 0.5f);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,6 +37,11 @@ namespace RPG.Cinematics
                 //Always
                 myPlayableDirector.Play();
             }
+        }
+
+        void EventTest()
+        {
+            eventTest(1.1f);
         }
     }
 }
