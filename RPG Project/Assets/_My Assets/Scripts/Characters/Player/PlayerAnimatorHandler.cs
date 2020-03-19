@@ -7,9 +7,9 @@ namespace RPG.Characters.Player
 {
     public class PlayerAnimatorHandler : CharacterAnimatorHandler
     {
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
         }
 
         //public void UpdateLocomotion(float speed)

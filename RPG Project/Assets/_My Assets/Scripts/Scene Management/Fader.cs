@@ -14,6 +14,11 @@ namespace RPG.SceneManagement
             //StartCoroutine(FadeOutIn());//For Testing
         }
 
+        public void FadeOutImmediate()
+        {
+            canvasGroup.alpha = 1;
+        }
+
         IEnumerator FadeOutIn()
         {
             yield return FadeOut(3f);

@@ -99,7 +99,14 @@ namespace RPG.Movement
         public void RestoreState(object state)
         {
             SerializableVector3 statePos = (SerializableVector3)state;
-            myMeshAgent.Warp(statePos.ToVector());
+            //NavMeshAgent myMeshAgent = GetComponent<NavMeshAgent>();
+            //if (myMeshAgent == null)
+            //{
+            //    Debug.LogError("LOL");
+            //    return;
+            //}
+
+            GetComponent<NavMeshAgent>().Warp(statePos.ToVector());
         }
     }
 }

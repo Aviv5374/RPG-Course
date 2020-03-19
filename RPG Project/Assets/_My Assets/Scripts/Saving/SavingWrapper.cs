@@ -10,14 +10,24 @@ namespace RPG.SceneManagement
     {
         const string defaultSaveFile = "save";
 
+        [SerializeField] float fadeInTime = 0.2f;
+
         CinemachineVirtualCamera virtualCamera;
 
         SavingSystem savingSystem;
 
-        void Start()
+        void Awake()
+        {                    
+            savingSystem = GetComponent<SavingSystem>();            
+        }
+
+
+        IEnumerator Start()
         {
-            savingSystem = GetComponent<SavingSystem>();
-            virtualCamera = GameObject.FindGameObjectWithTag("Player Camera").GetComponent<CinemachineVirtualCamera>();
+            Fader fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
+            yield return savingSystem.LoadLastScene(defaultSaveFile);
+            yield return fader.FadeIn(fadeInTime);
         }
 
         // Update is called once per frame
@@ -26,6 +36,7 @@ namespace RPG.SceneManagement
             if (Input.GetKeyDown(KeyCode.L))
             {
                 Load();
+                ResetPlayerCamera();
             }
 
             if (Input.GetKeyDown(KeyCode.S))
@@ -41,12 +52,20 @@ namespace RPG.SceneManagement
 
         public void Save()
         {
-            savingSystem.Save(defaultSaveFile);
+            GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
 
         public void Load()
         {
-            savingSystem.Load(defaultSaveFile);
+            GetComponent<SavingSystem>().Load(defaultSaveFile);            
+        }
+
+        public void ResetPlayerCamera()
+        {
+            if (!virtualCamera)
+            {
+                virtualCamera = GameObject.FindGameObjectWithTag("Player Camera").GetComponent<CinemachineVirtualCamera>();
+            }
             virtualCamera.enabled = false;
             virtualCamera.enabled = true;
         }

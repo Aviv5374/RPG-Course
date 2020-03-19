@@ -19,8 +19,19 @@ namespace RPG.Combat
 
         void Start()
         {
-            myAnimator = GetComponent<CharacterAnimatorHandler>();
-            actionScheduler = GetComponent<ActionScheduler>();
+            SetCComponent();
+        }
+
+        void SetCComponent()
+        {
+            if (!myAnimator)
+            {
+                myAnimator = GetComponent<CharacterAnimatorHandler>();
+            }
+            if (!actionScheduler)
+            {
+                actionScheduler = GetComponent<ActionScheduler>();
+            }
         }
 
         public void TakeDamage(float damage)
@@ -37,7 +48,8 @@ namespace RPG.Combat
         {
             if (IsDead)
             {
-                myAnimator.TriggerDeath();
+                SetCComponent();
+                myAnimator.TriggerDeath();                
                 actionScheduler.CancelCurrentAction();//?????
             }
         }
