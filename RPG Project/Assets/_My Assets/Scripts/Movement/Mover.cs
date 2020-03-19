@@ -91,22 +91,45 @@ namespace RPG.Movement
             StopMoving();
         }
 
+        #region SavingSystem
+        [System.Serializable]
+        struct MoverSaveData
+        {
+            public SerializableVector3 POS;
+            public SerializableVector3 ROT;
+        }
+
         public object CaptureState()
         {
-            return new SerializableVector3(transform.position);
+            #region OPTION ONE
+            //Dictionary<string, object> data1 = new Dictionary<string, object>();
+            //data1["POS"] = new SerializableVector3(transform.position);
+            //data1["ROT"] = new SerializableVector3(transform.eulerAngles);
+            #endregion
+            //OR
+            MoverSaveData data2 = new MoverSaveData();
+            data2.POS = new SerializableVector3(transform.position);
+            data2.ROT = new SerializableVector3(transform.eulerAngles);
+
+            return data2;
         }
 
         public void RestoreState(object state)
         {
-            SerializableVector3 statePos = (SerializableVector3)state;
-            //NavMeshAgent myMeshAgent = GetComponent<NavMeshAgent>();
-            //if (myMeshAgent == null)
-            //{
-            //    Debug.LogError("LOL");
-            //    return;
-            //}
-
-            GetComponent<NavMeshAgent>().Warp(statePos.ToVector());
+            #region OPTION ONE
+            /*
+            Dictionary<string, object> data1 = (Dictionary<string, object>)state;
+            Vector3 newPos = ((SerializableVector3)data1["POS"]).ToVector();
+            Vector3 newEulerAngles = ((SerializableVector3)data1["ROT"]).ToVector();
+            GetComponent<NavMeshAgent>().Warp(newPos);
+            transform.eulerAngles = newEulerAngles;
+            */
+            #endregion
+            //OR
+            MoverSaveData data2 = (MoverSaveData)state;
+            GetComponent<NavMeshAgent>().Warp(data2.POS.ToVector());
+            transform.eulerAngles = data2.ROT.ToVector();
         }
+        #endregion
     }
 }
