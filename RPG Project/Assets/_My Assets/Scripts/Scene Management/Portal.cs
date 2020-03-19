@@ -9,9 +9,15 @@ namespace RPG.SceneManagement
 {
     public class Portal : MonoBehaviour
     {
+        enum DestinationIdentifier
+        {
+            A, B, C, D
+        }
+
         [SerializeField] int sceneToLoad;
         [SerializeField] Transform spawnPoint;
-        
+        [SerializeField] DestinationIdentifier destination;
+
         void OnTriggerEnter(Collider other)
         {
             PlayerController player = other.GetComponent<PlayerController>();
@@ -23,6 +29,12 @@ namespace RPG.SceneManagement
 
         IEnumerator Transition()
         {
+            if (sceneToLoad < 0)
+            {
+                Debug.LogError("Scene to load not set.");
+                yield break;
+            }
+
             DontDestroyOnLoad(gameObject);            
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
             Debug.Log("Scene Loaded From " + name);
@@ -30,15 +42,16 @@ namespace RPG.SceneManagement
             UpdatePlayer(otherPortal);            
             Destroy(gameObject);
         }
-
-        //work only with 2 portals, one aech scene!!!!!
+        
         Portal GetOtherPortal()
         {
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this) continue;
-
-                return portal;
+                if (portal.destination == this.destination)
+                {
+                    return portal;
+                }
             }
 
             return null;
@@ -48,7 +61,7 @@ namespace RPG.SceneManagement
         {
             PlayerController player = FindObjectOfType<PlayerController>();
             player.GetComponent<NavMeshAgent>().Warp(otherPortal.spawnPoint.position);
-            //player.transform.rotation = otherPortal.spawnPoint.rotation;????
+            player.transform.rotation = otherPortal.spawnPoint.rotation;
         }
     }
 }
