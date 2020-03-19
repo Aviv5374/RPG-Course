@@ -23,7 +23,7 @@ namespace RPG.Cinematics
         void Start()
         {
             myPlayableDirector = GetComponent<PlayableDirector>();
-            Invoke("EventTest", 0.5f);
+            //Invoke("EventTest", 0.5f);
         }
 
         private void OnTriggerEnter(Collider other)
