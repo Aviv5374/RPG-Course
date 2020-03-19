@@ -298,7 +298,7 @@ PrefabInstance:
     - target: {fileID: 6391937263001199936, guid: b13760c7068d1574fbdf0dbf5f4de920,
         type: 3}
       propertyPath: m_Name
-      value: Level Portal (1)
+      value: End Level2 Portal (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6391937263001199937, guid: b13760c7068d1574fbdf0dbf5f4de920,
         type: 3}
@@ -515,7 +515,7 @@ PrefabInstance:
     - target: {fileID: 6197065440021688160, guid: d02dcef4f1ce4db4cbc601c204191333,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4905968
+      value: 3.4904048
       objectReference: {fileID: 0}
     - target: {fileID: 6197065440021688160, guid: d02dcef4f1ce4db4cbc601c204191333,
         type: 3}
@@ -525,7 +525,7 @@ PrefabInstance:
     - target: {fileID: 6197065440021688160, guid: d02dcef4f1ce4db4cbc601c204191333,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.75639
+      value: 20.756405
       objectReference: {fileID: 0}
     - target: {fileID: 6197065440021688160, guid: d02dcef4f1ce4db4cbc601c204191333,
         type: 3}
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b07408d94ac9e443a02dec37fc9888a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextlevel: 0
+  sceneToLoad: 0
 --- !u!1001 &1770251749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -689,7 +689,7 @@ PrefabInstance:
     - target: {fileID: 6391937263001199936, guid: b13760c7068d1574fbdf0dbf5f4de920,
         type: 3}
       propertyPath: m_Name
-      value: Level Portal
+      value: Start Level2 Portal
       objectReference: {fileID: 0}
     - target: {fileID: 6391937263001199937, guid: b13760c7068d1574fbdf0dbf5f4de920,
         type: 3}
@@ -763,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 4615946581375456587, guid: 02837140bd4644b43a72918ca98b16d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4905968
+      value: 3.4904048
       objectReference: {fileID: 0}
     - target: {fileID: 4615946581375456587, guid: 02837140bd4644b43a72918ca98b16d4,
         type: 3}
@@ -773,7 +773,7 @@ PrefabInstance:
     - target: {fileID: 4615946581375456587, guid: 02837140bd4644b43a72918ca98b16d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.75639
+      value: 20.756405
       objectReference: {fileID: 0}
     - target: {fileID: 4615946581375456587, guid: 02837140bd4644b43a72918ca98b16d4,
         type: 3}

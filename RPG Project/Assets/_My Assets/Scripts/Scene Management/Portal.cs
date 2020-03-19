@@ -9,20 +9,24 @@ namespace RPG.SceneManagement
     public class Portal : MonoBehaviour
     {
         [SerializeField] int sceneToLoad;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        private void OnTriggerEnter(Collider other)
+        
+        void OnTriggerEnter(Collider other)
         {
             PlayerController player = other.GetComponent<PlayerController>();
             if (player)
             {
-                SceneManager.LoadScene(sceneToLoad);
+                StartCoroutine(Transition());
             }
+        }
+
+        IEnumerator Transition()
+        {
+            DontDestroyOnLoad(gameObject);
+            AsyncOperation asyncOperationScene = SceneManager.LoadSceneAsync(sceneToLoad);            
+            yield return asyncOperationScene;
+            Debug.Log("Scene Loaded From " + name);
+            //yield return new WaitForSeconds(5f);
+            Destroy(gameObject);
         }
     }
 }

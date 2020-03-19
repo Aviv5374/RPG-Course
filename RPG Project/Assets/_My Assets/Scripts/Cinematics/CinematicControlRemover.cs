@@ -26,7 +26,7 @@ namespace RPG.Cinematics
 
         void DisableControl(PlayableDirector pd)
         {
-            print("DisableControl");
+            Debug.Log("DisableControl");
             player.StopMoving();//OR player.CancelCurrentAction();
             player.CancelAttack();
             player.enabled = false;
@@ -34,13 +34,13 @@ namespace RPG.Cinematics
 
         void EnableControl(PlayableDirector pd)
         {
-            print("EnableControl");
+            Debug.Log("EnableControl");
             player.enabled = true;
         }
 
         void EnableControl(float nonsese)
         {
-            print("EnableControl");
+            Debug.Log("EnableControlTest");
             player.enabled = true;
         }
     }
