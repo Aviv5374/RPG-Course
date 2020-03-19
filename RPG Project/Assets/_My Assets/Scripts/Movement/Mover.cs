@@ -5,10 +5,11 @@ using UnityEngine.AI;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Characters;
+using RPG.Saving;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour, IAction
+    public class Mover : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float injuredSpeed = 1.5f;
         [SerializeField] float walkSpeed = 4f;
@@ -88,6 +89,17 @@ namespace RPG.Movement
         public void CancelAction()
         {
             StopMoving();
+        }
+
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        public void RestoreState(object state)
+        {
+            SerializableVector3 statePos = (SerializableVector3)state;
+            myMeshAgent.Warp(statePos.ToVector());
         }
     }
 }

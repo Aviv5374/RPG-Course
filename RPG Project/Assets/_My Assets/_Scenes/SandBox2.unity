@@ -453,6 +453,9 @@ MonoBehaviour:
   sceneToLoad: 0
   spawnPoint: {fileID: 0}
   destination: 0
+  fadeOutTime: 1
+  fadeInTime: 2
+  fadeWaitTime: 0.5
 --- !u!1001 &1770251749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -529,6 +532,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440438824719085232, guid: 98c9989ee09ddcb41909805f5be47ffd,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: 1b25e91a-f720-4fbe-b6aa-0623d11d684c
+      objectReference: {fileID: 0}
     - target: {fileID: 7028254968868236570, guid: 98c9989ee09ddcb41909805f5be47ffd,
         type: 3}
       propertyPath: m_Name
