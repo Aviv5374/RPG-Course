@@ -25,20 +25,30 @@ namespace RPG.SceneManagement
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                savingSystem.Load(defaultSaveFile);
-                virtualCamera.enabled = false;
-                virtualCamera.enabled = true;
+                Load();
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                savingSystem.Save(defaultSaveFile);
+                Save();
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
                 savingSystem.Delete(defaultSaveFile);
             }
+        }
+
+        public void Save()
+        {
+            savingSystem.Save(defaultSaveFile);
+        }
+
+        public void Load()
+        {
+            savingSystem.Load(defaultSaveFile);
+            virtualCamera.enabled = false;
+            virtualCamera.enabled = true;
         }
     }
 
