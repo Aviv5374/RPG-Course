@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Characters;
 using RPG.Core;
+using RPG.Saving;
 
 namespace RPG.Combat
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float healthPoints = 100f;
         CharacterAnimatorHandler myAnimator;
@@ -28,13 +29,29 @@ namespace RPG.Combat
             {
                 healthPoints = Mathf.Max(healthPoints - damage, 0);
                 //Debug.Log(name + " health " + healthPoints);
-                if (IsDead)
-                {
-                    myAnimator.TriggerDeath();//????
-                    actionScheduler.CancelCurrentAction();//?????
-                }
-            }                           
+                DeathCheack();
+            }
         }
 
+        void DeathCheack()
+        {
+            if (IsDead)
+            {
+                myAnimator.TriggerDeath();
+                actionScheduler.CancelCurrentAction();//?????
+            }
+        }
+
+        public object CaptureState()
+        {
+            return healthPoints;
+        }
+
+        public void RestoreState(object state)
+        {
+            healthPoints = (float)state;
+
+            DeathCheack();
+        }
     }
 }

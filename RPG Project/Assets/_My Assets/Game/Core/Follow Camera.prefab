@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6197065440021688161}
   m_Layer: 0
   m_Name: Follow Camera
-  m_TagString: Untagged
+  m_TagString: Player Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,14 +160,14 @@ MonoBehaviour:
   m_ScreenX: 0.5539644
   m_ScreenY: 0.7202108
   m_CameraDistance: 7.7
-  m_DeadZoneWidth: 0.073
-  m_DeadZoneHeight: 0.184
+  m_DeadZoneWidth: 0.042
+  m_DeadZoneHeight: 0.074
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.479
-  m_SoftZoneHeight: 0.68
+  m_SoftZoneWidth: 0.307
+  m_SoftZoneHeight: 0.42
   m_BiasX: 0
-  m_BiasY: 0
+  m_BiasY: -0.027000388
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0

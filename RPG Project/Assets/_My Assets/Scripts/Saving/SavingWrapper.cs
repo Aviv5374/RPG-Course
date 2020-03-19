@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 using RPG.Saving;
 
 namespace RPG.SceneManagement
@@ -9,11 +10,14 @@ namespace RPG.SceneManagement
     {
         const string defaultSaveFile = "save";
 
+        CinemachineVirtualCamera virtualCamera;
+
         SavingSystem savingSystem;
 
         void Start()
         {
-            savingSystem = GetComponent<SavingSystem>();            
+            savingSystem = GetComponent<SavingSystem>();
+            virtualCamera = GameObject.FindGameObjectWithTag("Player Camera").GetComponent<CinemachineVirtualCamera>();
         }
 
         // Update is called once per frame
@@ -22,6 +26,8 @@ namespace RPG.SceneManagement
             if (Input.GetKeyDown(KeyCode.L))
             {
                 savingSystem.Load(defaultSaveFile);
+                virtualCamera.enabled = false;
+                virtualCamera.enabled = true;
             }
 
             if (Input.GetKeyDown(KeyCode.S))
