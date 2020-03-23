@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace RPG.My.Saving
@@ -7,20 +8,17 @@ namespace RPG.My.Saving
     [ExecuteAlways]
     public class MySaveableEntity : MonoBehaviour
     {
-        [SerializeField] string uniqueIdentifier = ""; //System.Guid.NewGuid().ToString();
-
+        [SerializeField] string uniqueIdentifier = "";
         public string UniqueIdentifier 
         {
             get 
             {
                 return uniqueIdentifier;
-            }
-
-            private set 
-            {
-                
-            }
+            }            
         }
+
+        bool isInPlayMode { get { return Application.IsPlaying(gameObject); } }
+        bool isInPrefabScene { get { return string.IsNullOrEmpty(gameObject.scene.path); } }
 
         public string GetUniqueIdentifier()
         {
@@ -28,9 +26,16 @@ namespace RPG.My.Saving
         }
 
         void Update()
-        {
-            if (Application.IsPlaying(gameObject)) { return; }
-            Debug.Log("Editing");
+        {            
+            if (isInPlayMode || isInPrefabScene) { return; }
+
+            SerializedObject serializedObject = new SerializedObject(this);
+            SerializedProperty serializedProperty = serializedObject.FindProperty("uniqueIdentifier");
+            if (string.IsNullOrEmpty(serializedProperty.stringValue))
+            {
+                serializedProperty.stringValue = System.Guid.NewGuid().ToString();
+                serializedObject.ApplyModifiedProperties();
+            }            
         }
 
         public object CaptureState()
