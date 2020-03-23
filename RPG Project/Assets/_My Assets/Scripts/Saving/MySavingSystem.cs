@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,21 +12,20 @@ namespace RPG.My.Saving
         {
 
         }
-
-        // Update is called once per frame
-        void Update()
+        
+        string GetPathFromSaveFile(string saveFileName)
         {
-
+            return Path.Combine(Application.persistentDataPath, saveFileName + ".sav");
         }
 
         public void Save(string saveFileName)
         {
-            Debug.Log("Saving to " + saveFileName);
+            Debug.Log("Saving to " + GetPathFromSaveFile(saveFileName));
         }
 
         public void Load(string saveFileName)
         {
-            Debug.Log("Loading from " + saveFileName);
+            Debug.Log("Loading from " + GetPathFromSaveFile(saveFileName));
         }
 
         public Object LoadLastScene(string saveFileName)
