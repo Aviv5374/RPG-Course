@@ -2,34 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using RPG.Saving;
+using RPG.My.Saving;
 
 namespace RPG.SceneManagement
 {
-    public class SavingWrapper : MonoBehaviour
+    public class MySavingWrapper : MonoBehaviour
     {
-        const string defaultSaveFile = "save";
+        const string defaultSaveFile = "mySave";
 
         [SerializeField] float fadeInTime = 0.2f;
 
         CinemachineVirtualCamera virtualCamera;
+       
+        MySavingSystem savingSystem;
 
-        SavingSystem savingSystem;        
-
-        SavingSystem SavingSystem
+        MySavingSystem SavingSystem 
         {
-            get
+            get 
             {
                 if (!savingSystem)
                 {
-                    savingSystem = GetComponent<SavingSystem>();
+                    savingSystem = GetComponent<MySavingSystem>();
                 }
 
                 return savingSystem;
-            }
+            }  
         }
-
-
+        
         IEnumerator Start()
         {
             Fader fader = FindObjectOfType<Fader>();
@@ -65,7 +64,7 @@ namespace RPG.SceneManagement
 
         public void Load()
         {
-            SavingSystem.Load(defaultSaveFile);            
+            SavingSystem.Load(defaultSaveFile);
         }
 
         public void ResetPlayerCamera()
@@ -78,5 +77,4 @@ namespace RPG.SceneManagement
             virtualCamera.enabled = true;
         }
     }
-
 }
