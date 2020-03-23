@@ -51,10 +51,10 @@ namespace RPG.SceneManagement
                 Save();
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                SavingSystem.Delete(defaultSaveFile);
-            }
+            //if (Input.GetKeyDown(KeyCode.D))
+            //{
+            //    SavingSystem.Delete(defaultSaveFile);
+            //}
         }
 
         public void Save()

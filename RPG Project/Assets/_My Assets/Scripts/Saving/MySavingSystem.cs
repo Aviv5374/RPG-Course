@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +8,7 @@ using UnityEngine;
 namespace RPG.My.Saving
 {
     public class MySavingSystem : MonoBehaviour
-    {
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-        
+    {                
         string GetPathFromSaveFile(string saveFileName)
         {
             return Path.Combine(Application.persistentDataPath, saveFileName + ".sav");
@@ -24,10 +19,10 @@ namespace RPG.My.Saving
             string path = GetPathFromSaveFile(saveFileName);
             Debug.Log("Saving to " + path);
             using (FileStream stream = File.Open(path, FileMode.Create)) 
-            { 
-                stream.WriteByte(102);
-                byte[] bytes = Encoding.UTF8.GetBytes("¡Hola Mundo!");
-                stream.Write(bytes, 0, bytes.Length);
+            {
+                Transform playerTransform = GetPlayerTransform();
+                byte[] buffer = SerializeVector(playerTransform.position);
+                stream.Write(buffer, 0, buffer.Length);
             }            
         }
 
@@ -39,19 +34,44 @@ namespace RPG.My.Saving
             {
                 byte[] buffer = new byte[stream.Length];
                 stream.Read(buffer, 0, buffer.Length);
-                Debug.Log(Encoding.UTF8.GetString(buffer));
+
+                Transform playerTransform = GetPlayerTransform();
+                playerTransform.position = DeserializeVector(buffer);
             }
             
         }
 
-        public Object LoadLastScene(string saveFileName)
+        private Transform GetPlayerTransform()
         {
-            return null;
+            return GameObject.FindWithTag("Player").transform;
         }
 
-        public void Delete(string saveFileName)
+        private byte[] SerializeVector(Vector3 vector)
         {
-
+            byte[] vectorBytes = new byte[3 * 4];
+            BitConverter.GetBytes(vector.x).CopyTo(vectorBytes, 0);
+            BitConverter.GetBytes(vector.y).CopyTo(vectorBytes, 4);
+            BitConverter.GetBytes(vector.z).CopyTo(vectorBytes, 8);
+            return vectorBytes;
         }
+
+        private Vector3 DeserializeVector(byte[] buffer)
+        {
+            Vector3 result = new Vector3();
+            result.x = BitConverter.ToSingle(buffer, 0);
+            result.y = BitConverter.ToSingle(buffer, 4);
+            result.z = BitConverter.ToSingle(buffer, 8);
+            return result;
+        }
+
+        //public Object LoadLastScene(string saveFileName)
+        //{
+        //    return null;
+        //}
+
+        //public void Delete(string saveFileName)
+        //{
+
+        //}
     }
 }
