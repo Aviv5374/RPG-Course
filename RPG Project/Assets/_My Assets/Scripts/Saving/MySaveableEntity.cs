@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace RPG.My.Saving
 {
@@ -9,22 +10,11 @@ namespace RPG.My.Saving
     public class MySaveableEntity : MonoBehaviour
     {
         [SerializeField] string uniqueIdentifier = "";
-        public string UniqueIdentifier 
-        {
-            get 
-            {
-                return uniqueIdentifier;
-            }            
-        }
-
+        
+        public string UniqueIdentifier { get { return uniqueIdentifier; } }        
         bool isInPlayMode { get { return Application.IsPlaying(gameObject); } }
         bool isInPrefabScene { get { return string.IsNullOrEmpty(gameObject.scene.path); } }
-
-        public string GetUniqueIdentifier()
-        {
-            return "";
-        }
-
+        
         void Update()
         {            
             if (isInPlayMode || isInPrefabScene) { return; }
@@ -40,13 +30,15 @@ namespace RPG.My.Saving
 
         public object CaptureState()
         {
-            print("Capturing state for " + GetUniqueIdentifier());
-            return null;
+            print("Capturing state for " + UniqueIdentifier);
+            return new MySerializableVector3(transform.position);
         }
 
         public void RestoreState(object state)
         {
-            print("Restoring state for " + GetUniqueIdentifier());
+            print("Restoring state for " + UniqueIdentifier);
+            MySerializableVector3 POS = (MySerializableVector3)state;
+            GetComponent<NavMeshAgent>().Warp(POS.ToVector());
         }
     }
 }

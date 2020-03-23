@@ -19,7 +19,7 @@ namespace RPG.My.Saving
             Dictionary<string, object> state = new Dictionary<string, object>();
             foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
             {
-                state[saveable.GetUniqueIdentifier()] = saveable.CaptureState();
+                state[saveable.UniqueIdentifier] = saveable.CaptureState();
             }
             return state;
         }
@@ -29,7 +29,7 @@ namespace RPG.My.Saving
             Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
             foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
             {
-                saveable.RestoreState(stateDict[saveable.GetUniqueIdentifier()]);
+                saveable.RestoreState(stateDict[saveable.UniqueIdentifier]);
             }
         }
 
