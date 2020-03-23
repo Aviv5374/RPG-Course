@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,21 @@ namespace RPG.My.Saving
 
         public void Save(string saveFileName)
         {
-            Debug.Log("Saving to " + GetPathFromSaveFile(saveFileName));
+            string path = GetPathFromSaveFile(saveFileName);
+            Debug.Log("Saving to " + path);
+            FileStream stream = File.Open(path, FileMode.Create);
+            stream.WriteByte(102);
+            byte[] bytes = Encoding.UTF8.GetBytes("¡Hola Mundo!");
+            stream.Write(bytes, 0, bytes.Length);
+            stream.Close();
         }
 
         public void Load(string saveFileName)
         {
-            Debug.Log("Loading from " + GetPathFromSaveFile(saveFileName));
+            string path = GetPathFromSaveFile(saveFileName);
+            Debug.Log("Loading from " + path);
+            //FileStream stream = File.Open(path, FileMode.Create);            
+            //stream.Close();
         }
 
         public Object LoadLastScene(string saveFileName)
