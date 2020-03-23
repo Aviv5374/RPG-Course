@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace RPG.My.Saving
@@ -19,10 +19,14 @@ namespace RPG.My.Saving
             string path = GetPathFromSaveFile(saveFileName);
             Debug.Log("Saving to " + path);
             using (FileStream stream = File.Open(path, FileMode.Create)) 
-            {
-                Transform playerTransform = GetPlayerTransform();
-                byte[] buffer = SerializeVector(playerTransform.position);
-                stream.Write(buffer, 0, buffer.Length);
+            {                
+                MySerializableVector3 position = new MySerializableVector3(GetPlayerTransform().position);
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, position);
+                //|
+                //V
+                //byte[] buffer = SerializeVector(playerTransform.position);
+                //stream.Write(buffer, 0, buffer.Length);
             }            
         }
 
@@ -32,13 +36,17 @@ namespace RPG.My.Saving
             Debug.Log("Loading from " + path);
             using (FileStream stream = File.Open(path, FileMode.Open))
             {
-                byte[] buffer = new byte[stream.Length];
-                stream.Read(buffer, 0, buffer.Length);
-
                 Transform playerTransform = GetPlayerTransform();
-                playerTransform.position = DeserializeVector(buffer);
+                BinaryFormatter formatter = new BinaryFormatter();
+                MySerializableVector3 position = (MySerializableVector3)formatter.Deserialize(stream);
+                playerTransform.position = position.ToVector();
+                //|
+                //V
+                //byte[] buffer = new byte[stream.Length];
+                //stream.Read(buffer, 0, buffer.Length);
+                //playerTransform.position = DeserializeVector(buffer);
             }
-            
+
         }
 
         private Transform GetPlayerTransform()
