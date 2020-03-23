@@ -4,16 +4,19 @@ using UnityEngine;
 
 namespace RPG.My.Saving
 {
+    [ExecuteAlways]
     public class MySaveableEntity : MonoBehaviour
     {
+        [SerializeField] string uniqueIdentifier = ""; //System.Guid.NewGuid().ToString();
+
         public string UniqueIdentifier 
         {
             get 
             {
-                return "";
+                return uniqueIdentifier;
             }
 
-            set 
+            private set 
             {
                 
             }
@@ -22,6 +25,12 @@ namespace RPG.My.Saving
         public string GetUniqueIdentifier()
         {
             return "";
+        }
+
+        void Update()
+        {
+            if (Application.IsPlaying(gameObject)) { return; }
+            Debug.Log("Editing");
         }
 
         public object CaptureState()
