@@ -6,10 +6,11 @@ using RPG.Combat;
 using RPG.Core;
 using RPG.Characters;
 using RPG.Saving;
+using RPG.My.Saving;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour, IAction, ISaveable
+    public class Mover : MonoBehaviour, IAction, ISaveable, IMySaveable
     {
         [SerializeField] float injuredSpeed = 1.5f;
         [SerializeField] float walkSpeed = 4f;

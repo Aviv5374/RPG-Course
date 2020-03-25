@@ -19,10 +19,10 @@ namespace RPG.Combat
 
         void Start()
         {
-            SetCComponent();
+            SetComponent();
         }
 
-        void SetCComponent()
+        void SetComponent()
         {
             if (!myAnimator)
             {
@@ -48,7 +48,7 @@ namespace RPG.Combat
         {
             if (IsDead)
             {
-                SetCComponent();
+                SetComponent();
                 myAnimator.TriggerDeath();                
                 actionScheduler.CancelCurrentAction();//?????
             }

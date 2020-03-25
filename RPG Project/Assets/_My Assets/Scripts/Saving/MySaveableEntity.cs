@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace RPG.My.Saving
 {
@@ -31,14 +30,26 @@ namespace RPG.My.Saving
         public object CaptureState()
         {
             print("Capturing state for " + UniqueIdentifier);
-            return new MySerializableVector3(transform.position);
+            Dictionary<string, object> state = new Dictionary<string, object>();
+            foreach (IMySaveable saveable in GetComponents<IMySaveable>())
+            {
+                state[saveable.GetType().ToString()] = saveable.CaptureState();
+            }
+            return state;
         }
 
         public void RestoreState(object state)
         {
             print("Restoring state for " + UniqueIdentifier);
-            MySerializableVector3 POS = (MySerializableVector3)state;
-            GetComponent<NavMeshAgent>().Warp(POS.ToVector());
+            Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
+            foreach (IMySaveable saveable in GetComponents<IMySaveable>())
+            {
+                string typeString = saveable.GetType().ToString();
+                if (stateDict.ContainsKey(typeString))
+                {
+                    saveable.RestoreState(stateDict[typeString]);
+                }
+            }
         }
     }
 }
