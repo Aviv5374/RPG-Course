@@ -60,23 +60,15 @@ namespace RPG.My.Saving
         public IEnumerator LoadLastScene(string saveFileName)
         {
             Dictionary<string, object> state = LoadFile(saveFileName);
-
-            #region Check if last scene can/need to be load 
-            if (!state.ContainsKey(lastSceneBuildIndexKey) || (int)state[lastSceneBuildIndexKey] < 0)
+            if (state.ContainsKey(lastSceneBuildIndexKey))
             {
-                Debug.LogError("Scene to load not set!");
-                yield break;
+                int buildIndex = (int)state[lastSceneBuildIndexKey];
+                if (buildIndex != SceneManager.GetActiveScene().buildIndex)
+                {
+                    yield return SceneManager.LoadSceneAsync(buildIndex);
+                }
             }
-
-            if ((int)state[lastSceneBuildIndexKey] == SceneManager.GetActiveScene().buildIndex)
-            {
-                Debug.LogWarning("Scene is already load.");
-                yield break;
-            }
-            #endregion
-
-            yield return SceneManager.LoadSceneAsync((int)state[lastSceneBuildIndexKey]);
-            RestoreState(state);           
+            RestoreState(state);
         }
 
         Dictionary<string, object> LoadFile(string saveFileName)
