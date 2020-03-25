@@ -4,10 +4,11 @@ using UnityEngine;
 using RPG.Characters;
 using RPG.Core;
 using RPG.Saving;
+using RPG.My.Saving;
 
 namespace RPG.Combat
 {
-    public class Health : MonoBehaviour, ISaveable
+    public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
         [SerializeField] float healthPoints = 100f;
         CharacterAnimatorHandler myAnimator;

@@ -15,7 +15,8 @@ namespace RPG.My.Saving
         public string UniqueIdentifier { get { return uniqueIdentifier; } }        
         bool isInPlayMode { get { return Application.IsPlaying(gameObject); } }
         bool isInPrefabScene { get { return string.IsNullOrEmpty(gameObject.scene.path); } }
-        
+
+#if UNITY_EDITOR
         void Update()
         {            
             if (isInPlayMode || isInPrefabScene) { return; }
@@ -29,6 +30,7 @@ namespace RPG.My.Saving
             }
             globalLookup[serialProperty.stringValue] = this;
         }
+#endif
 
         bool IsUnique(string candidate)
         {
