@@ -17,8 +17,10 @@ namespace RPG.My.Saving
         #region Saving
 
         public void Save(string saveFileName)
-        {            
-            SaveFile(saveFileName, CaptureState());
+        {
+            Dictionary<string, object> state = LoadFile(saveFileName);
+            CaptureState(state);
+            SaveFile(saveFileName, state);
         }
 
         void SaveFile(string saveFileName, Dictionary<string, object> state)
@@ -32,14 +34,12 @@ namespace RPG.My.Saving
             }
         }
 
-        Dictionary<string, object> CaptureState()
-        {
-            Dictionary<string, object> state = new Dictionary<string, object>();
+        void CaptureState(Dictionary<string, object> state)
+        {            
             foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
             {
                 state[saveable.UniqueIdentifier] = saveable.CaptureState();
-            }
-            return state;
+            }            
         }
 
         #endregion
@@ -54,6 +54,10 @@ namespace RPG.My.Saving
         Dictionary<string, object> LoadFile(string saveFileName)
         {
             string path = GetPathFromSaveFile(saveFileName);
+            if (!File.Exists(path))
+            {
+                return new Dictionary<string, object>();
+            } 
             Debug.Log("Loading from " + path);
             using (FileStream stream = File.Open(path, FileMode.Open))
             {
@@ -66,7 +70,11 @@ namespace RPG.My.Saving
         {            
             foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
             {
-                saveable.RestoreState(state[saveable.UniqueIdentifier]);
+                string ID = saveable.UniqueIdentifier;
+                if (state.ContainsKey(ID))
+                {
+                    saveable.RestoreState(state[ID]);
+                }
             }
         }
 
