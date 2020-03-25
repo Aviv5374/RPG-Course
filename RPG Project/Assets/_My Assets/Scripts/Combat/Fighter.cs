@@ -12,6 +12,8 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] float weaponDamage = 5f;
+        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] Transform handTransform = null;
 
         Mover mover;
         CharacterAnimatorHandler myAnimator;
@@ -32,6 +34,7 @@ namespace RPG.Combat
             actionScheduler = GetComponent<ActionScheduler>();
 
             isChasing = false;
+            SpawnWeapon();
         }
 
         // Update is called once per frame
@@ -55,6 +58,11 @@ namespace RPG.Combat
                     AttackBehaviour();
                 }
             }
+        }
+
+        void SpawnWeapon()
+        {
+            Instantiate(weaponPrefab, handTransform);
         }
 
         void AttackBehaviour()
