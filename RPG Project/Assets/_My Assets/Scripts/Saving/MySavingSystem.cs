@@ -14,7 +14,25 @@ namespace RPG.My.Saving
             return Path.Combine(Application.persistentDataPath, saveFileName + ".sav");
         }
 
-        object CaptureState()
+        #region Saving
+
+        public void Save(string saveFileName)
+        {            
+            SaveFile(saveFileName, CaptureState());
+        }
+
+        void SaveFile(string saveFileName, Dictionary<string, object> state)
+        {
+            string path = GetPathFromSaveFile(saveFileName);
+            Debug.Log("Saving to " + path);
+            using (FileStream stream = File.Open(path, FileMode.Create))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, state);
+            }
+        }
+
+        Dictionary<string, object> CaptureState()
         {
             Dictionary<string, object> state = new Dictionary<string, object>();
             foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
@@ -24,42 +42,40 @@ namespace RPG.My.Saving
             return state;
         }
 
-        void RestoreState(object state)
-        {
-            Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
-            foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
-            {
-                saveable.RestoreState(stateDict[saveable.UniqueIdentifier]);
-            }
-        }
+        #endregion
 
-        public void Save(string saveFileName)
-        {
-            string path = GetPathFromSaveFile(saveFileName);
-            Debug.Log("Saving to " + path);
-            using (FileStream stream = File.Open(path, FileMode.Create)) 
-            {                               
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, CaptureState());                
-            }            
-        }
+        #region Loading
 
         public void Load(string saveFileName)
+        {            
+            RestoreState(LoadFile(saveFileName));
+        }
+
+        Dictionary<string, object> LoadFile(string saveFileName)
         {
             string path = GetPathFromSaveFile(saveFileName);
             Debug.Log("Loading from " + path);
             using (FileStream stream = File.Open(path, FileMode.Open))
-            {                
+            {
                 BinaryFormatter formatter = new BinaryFormatter();
-                RestoreState(formatter.Deserialize(stream));
+                return (Dictionary<string, object>)formatter.Deserialize(stream);
             }
-
         }
-        
+
+        void RestoreState(Dictionary<string, object> state)
+        {            
+            foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
+            {
+                saveable.RestoreState(state[saveable.UniqueIdentifier]);
+            }
+        }
+
         //public Object LoadLastScene(string saveFileName)
         //{
         //    return null;
         //}
+
+        #endregion
 
         //public void Delete(string saveFileName)
         //{
