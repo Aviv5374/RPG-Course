@@ -8,6 +8,8 @@ namespace RPG.My.Saving
     [ExecuteAlways]
     public class MySaveableEntity : MonoBehaviour
     {
+        static Dictionary<string, MySaveableEntity> globalLookup = new Dictionary<string, MySaveableEntity>();
+
         [SerializeField] string uniqueIdentifier = "";
         
         public string UniqueIdentifier { get { return uniqueIdentifier; } }        
@@ -19,17 +21,31 @@ namespace RPG.My.Saving
             if (isInPlayMode || isInPrefabScene) { return; }
 
             SerializedObject serializedObject = new SerializedObject(this);
-            SerializedProperty serializedProperty = serializedObject.FindProperty("uniqueIdentifier");
-            if (string.IsNullOrEmpty(serializedProperty.stringValue))
+            SerializedProperty serialProperty = serializedObject.FindProperty("uniqueIdentifier");
+            if (string.IsNullOrEmpty(serialProperty.stringValue) || !IsUnique(serialProperty.stringValue))
             {
-                serializedProperty.stringValue = System.Guid.NewGuid().ToString();
+                serialProperty.stringValue = System.Guid.NewGuid().ToString();
                 serializedObject.ApplyModifiedProperties();
-            }            
+            }
+            globalLookup[serialProperty.stringValue] = this;
+        }
+
+        bool IsUnique(string candidate)
+        {
+            if (!globalLookup.ContainsKey(candidate) || globalLookup[candidate] == this) return true;
+            
+            if (globalLookup[candidate] == null || globalLookup[candidate].uniqueIdentifier != candidate)
+            {
+                globalLookup.Remove(candidate);
+                return true;
+            }
+
+            return false;
         }
 
         public object CaptureState()
         {
-            print("Capturing state for " + UniqueIdentifier);
+            //print("Capturing state for " + uniqueIdentifier);
             Dictionary<string, object> state = new Dictionary<string, object>();
             foreach (IMySaveable saveable in GetComponents<IMySaveable>())
             {
@@ -40,7 +56,7 @@ namespace RPG.My.Saving
 
         public void RestoreState(object state)
         {
-            print("Restoring state for " + UniqueIdentifier);
+            //print("Restoring state for " + uniqueIdentifier);
             Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
             foreach (IMySaveable saveable in GetComponents<IMySaveable>())
             {

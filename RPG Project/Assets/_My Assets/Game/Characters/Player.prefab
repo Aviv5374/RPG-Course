@@ -84,6 +84,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7020042096724363386, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
       propertyPath: healthPoints
