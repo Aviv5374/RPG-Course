@@ -35,7 +35,7 @@ namespace RPG.SceneManagement
         {
             if (sceneToLoad < 0)
             {
-                Debug.LogError("Scene to load not set.");
+                Debug.LogError("Scene to load not set!");
                 yield break;
             }
 

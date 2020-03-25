@@ -4,11 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RPG.My.Saving
 {
     public class MySavingSystem : MonoBehaviour
-    {                
+    {
+        const string lastSceneBuildIndexKey = "lastSceneBuildIndex";
+
         string GetPathFromSaveFile(string saveFileName)
         {
             return Path.Combine(Application.persistentDataPath, saveFileName + ".sav");
@@ -39,7 +42,10 @@ namespace RPG.My.Saving
             foreach (MySaveableEntity saveable in FindObjectsOfType<MySaveableEntity>())
             {
                 state[saveable.UniqueIdentifier] = saveable.CaptureState();
-            }            
+            }
+
+            //TODO: Make work through SceneLoaderManager
+            state[lastSceneBuildIndexKey] = SceneManager.GetActiveScene().buildIndex;
         }
 
         #endregion
@@ -49,6 +55,28 @@ namespace RPG.My.Saving
         public void Load(string saveFileName)
         {            
             RestoreState(LoadFile(saveFileName));
+        }
+
+        public IEnumerator LoadLastScene(string saveFileName)
+        {
+            Dictionary<string, object> state = LoadFile(saveFileName);
+
+            #region Check if last scene can/need to be load 
+            if (!state.ContainsKey(lastSceneBuildIndexKey) || (int)state[lastSceneBuildIndexKey] < 0)
+            {
+                Debug.LogError("Scene to load not set!");
+                yield break;
+            }
+
+            if ((int)state[lastSceneBuildIndexKey] == SceneManager.GetActiveScene().buildIndex)
+            {
+                Debug.LogWarning("Scene is already load.");
+                yield break;
+            }
+            #endregion
+
+            yield return SceneManager.LoadSceneAsync((int)state[lastSceneBuildIndexKey]);
+            RestoreState(state);           
         }
 
         Dictionary<string, object> LoadFile(string saveFileName)
@@ -77,11 +105,6 @@ namespace RPG.My.Saving
                 }
             }
         }
-
-        //public Object LoadLastScene(string saveFileName)
-        //{
-        //    return null;
-        //}
 
         #endregion
 

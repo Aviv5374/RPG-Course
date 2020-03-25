@@ -28,14 +28,14 @@ namespace RPG.SceneManagement
                 return savingSystem;
             }  
         }
-        
-        //IEnumerator Start()
-        //{
-        //    Fader fader = FindObjectOfType<Fader>();
-        //    fader.FadeOutImmediate();
-        //    yield return SavingSystem.LoadLastScene(defaultSaveFile);
-        //    yield return fader.FadeIn(fadeInTime);
-        //}
+
+        IEnumerator Start()
+        {
+            Fader fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
+            yield return SavingSystem.LoadLastScene(defaultSaveFile);
+            yield return fader.FadeIn(fadeInTime);
+        }
 
         // Update is called once per frame
         void Update()
