@@ -125,6 +125,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8059321513161264445, guid: a78a31abca1fc7740815ead32a423d26,
         type: 3}
+    - target: {fileID: 8924733377236955617, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: weaponOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 24714c8c84ecb8544822bc40a5512785,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4810c451e0357946b8dea19253ab382, type: 3}
 --- !u!1 &6067674649165540464 stripped

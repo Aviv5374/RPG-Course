@@ -23,11 +23,19 @@ namespace RPG.Core
 
         void SetMyAnimator()//TODO:FINE Better Method Name
         {
-            myAnimator = GetComponent<Animator>();
+            if (!myAnimator)//??????
+            {
+                myAnimator = GetComponent<Animator>();
+            }
             for (int index = 0; index < myAnimator.parameterCount; index++)
             {
                 myAnimtorParameters.Add(myAnimator.GetParameter(index));
             }
+        }
+
+        public virtual void AnimatorControllerSwicher(AnimatorOverrideController animatorOverride)
+        {
+            myAnimator.runtimeAnimatorController = animatorOverride;
         }
 
         //TODO:Maybe private Update is Better? DO i need the Update method????
