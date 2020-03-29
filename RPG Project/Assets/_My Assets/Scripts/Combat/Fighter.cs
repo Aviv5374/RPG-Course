@@ -11,10 +11,9 @@ namespace RPG.Combat
     {
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float weaponDamage = 5f;
-        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] float weaponDamage = 5f;        
         [SerializeField] Transform handTransform = null;
-        [SerializeField] AnimatorOverrideController weaponOverride = null;
+        [SerializeField] Weapon weapon = null;
 
         Mover mover;
         CharacterAnimatorHandler myAnimator;
@@ -37,8 +36,7 @@ namespace RPG.Combat
             isChasing = false;
             SpawnWeapon();
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
@@ -63,8 +61,8 @@ namespace RPG.Combat
 
         void SpawnWeapon()
         {
-            Instantiate(weaponPrefab, handTransform);
-            myAnimator.AnimatorControllerSwicher(weaponOverride);
+            if (!weapon) { return; }
+            weapon.Spawn(handTransform, myAnimator);            
         }
 
         void AttackBehaviour()

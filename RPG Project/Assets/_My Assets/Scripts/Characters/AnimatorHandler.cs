@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPG.Characters
 {
     [RequireComponent(typeof(Animator))]
     public class AnimatorHandler : MonoBehaviour
