@@ -9,8 +9,9 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {        
-        [SerializeField] float timeBetweenAttacks = 1f;                
-        [SerializeField] Transform handTransform = null;
+        [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
 
         Mover mover;
@@ -61,7 +62,7 @@ namespace RPG.Combat
         public void EquipWeapon(Weapon weapon)
         {            
             currentWeapon = weapon;
-            currentWeapon.Spawn(handTransform, myAnimator);
+            currentWeapon.Spawn(rightHandTransform, leftHandTransform, myAnimator);
         }
 
         void AttackBehaviour()
@@ -81,7 +82,7 @@ namespace RPG.Combat
             myAnimator.TriggerAttack();
         }
 
-        // Animation Event
+        #region Animation Events
         void Hit()
         {
             if (targetHealth)
@@ -89,6 +90,13 @@ namespace RPG.Combat
                 targetHealth.TakeDamage(currentWeapon.Damage);
             }            
         }
+
+        void Shoot()
+        {
+
+        }
+
+        #endregion
 
         public bool CanAttack(CombatTarget combatTarget)
         {

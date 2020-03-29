@@ -12,15 +12,28 @@ namespace RPG.Combat
 		[SerializeField] float damage = 5f;
 		[SerializeField] float range = 2f;
 		[SerializeField] AnimatorOverrideController animatorOverride = null;
-
+		//if is a character with 3 hand or more it need to be an enum
+		//What happens if the character has less than two hands? And do you get into a minus hands?
+		[SerializeField] bool isRightHanded = true;
+		
 		public float Damage { get => damage;}
 		public float Range { get => range;}
 
-		public void Spawn(Transform handTransform, CharacterAnimatorHandler animatorHandler)
+		public void Spawn(Transform rightHand, Transform LeftHand, CharacterAnimatorHandler animatorHandler)
 		{
 			if(!weaponPrefab || !animatorOverride) { return; }
-			Instantiate(weaponPrefab, handTransform);
+			Instantiate(weaponPrefab, GetAHand(rightHand, LeftHand));
 			animatorHandler.AnimatorControllerSwicher(animatorOverride);
+		}
+
+		Transform GetAHand(Transform rightHand, Transform LeftHand)
+		{
+			if (isRightHanded)
+			{
+				return rightHand;
+			}
+
+			return LeftHand;
 		}
 	}
 }
