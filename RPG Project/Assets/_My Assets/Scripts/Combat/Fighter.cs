@@ -87,13 +87,20 @@ namespace RPG.Combat
         {
             if (targetHealth)
             {
-                targetHealth.TakeDamage(currentWeapon.Damage);
+                if (currentWeapon.HasProjectile)
+                {
+                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, targetHealth);
+                }
+                else 
+                {
+                    targetHealth.TakeDamage(currentWeapon.Damage);
+                }
             }            
         }
 
         void Shoot()
         {
-
+            Hit();
         }
 
         #endregion

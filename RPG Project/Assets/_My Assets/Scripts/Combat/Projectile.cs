@@ -6,9 +6,9 @@ namespace RPG.Combat
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] Transform target = null;
         [SerializeField] float speed = 1f;
 
+        Health target = null;
         CapsuleCollider targetCapsule = null;
 
         CapsuleCollider TargetCapsule 
@@ -17,12 +17,14 @@ namespace RPG.Combat
             {
                 if (targetCapsule == null)
                 {
-                    targetCapsule = target.GetComponent<CapsuleCollider>();
+                    targetCapsule = Target.GetComponent<CapsuleCollider>();
                 }
 
                 return targetCapsule;
             } 
         }
+
+        public Health Target { get => target; set => target = value; }
 
         #region Initialization
 
@@ -42,7 +44,7 @@ namespace RPG.Combat
 
         void Update()
         {
-            if (!target) { return; }
+            if (!Target) { return; }
             transform.LookAt(GetAimLocation());
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
@@ -53,9 +55,9 @@ namespace RPG.Combat
         {           
             if (TargetCapsule == null)
             {
-                return target.position;
+                return Target.transform.position;
             }
-            return target.position + Vector3.up * TargetCapsule.height / 2;
+            return Target.transform.position + Vector3.up * TargetCapsule.height / 2;
         }
 
     }

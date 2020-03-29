@@ -9,6 +9,7 @@ namespace RPG.Combat
 	public class Weapon : ScriptableObject
 	{
 		[SerializeField] WeaponPrefab weaponPrefab = null;//OR [SerializeField] GameObject equippedPrefab = null;
+		[SerializeField] Projectile projectile = null;
 		[SerializeField] float damage = 5f;
 		[SerializeField] float range = 2f;
 		[SerializeField] AnimatorOverrideController animatorOverride = null;
@@ -18,12 +19,19 @@ namespace RPG.Combat
 		
 		public float Damage { get => damage;}
 		public float Range { get => range;}
+		public bool HasProjectile { get { return projectile; } }
 
 		public void Spawn(Transform rightHand, Transform LeftHand, CharacterAnimatorHandler animatorHandler)
 		{
 			if(!weaponPrefab || !animatorOverride) { return; }
 			Instantiate(weaponPrefab, GetAHand(rightHand, LeftHand));
 			animatorHandler.AnimatorControllerSwicher(animatorOverride);
+		}
+
+		public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+		{
+			Projectile projectileInstance = Instantiate(projectile, GetAHand(rightHand, leftHand).position, Quaternion.identity);
+			projectileInstance.Target = target;
 		}
 
 		Transform GetAHand(Transform rightHand, Transform LeftHand)
