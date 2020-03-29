@@ -8,6 +8,7 @@ namespace RPG.Combat
     {
         [SerializeField] float speed = 1f;
 
+        float damage = 0;
         Health target = null;
         CapsuleCollider targetCapsule = null;
 
@@ -25,6 +26,7 @@ namespace RPG.Combat
         }
 
         public Health Target { get => target; set => target = value; }
+        public float Damage { get => damage; set => damage = value; }
 
         #region Initialization
 
@@ -50,6 +52,15 @@ namespace RPG.Combat
         }
 
         #endregion
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<Health>() == target)
+            {
+                target.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
 
         private Vector3 GetAimLocation()
         {           
