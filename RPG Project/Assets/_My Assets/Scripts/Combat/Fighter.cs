@@ -8,10 +8,8 @@ using RPG.Characters;
 namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
-    {
-        [SerializeField] float weaponRange = 2f;
-        [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float weaponDamage = 5f;        
+    {        
+        [SerializeField] float timeBetweenAttacks = 1f;                
         [SerializeField] Transform handTransform = null;
         [SerializeField] Weapon weapon = null;
 
@@ -25,7 +23,7 @@ namespace RPG.Combat
         bool isInjured = false;
         float timeSinceLastAttack = Mathf.Infinity;
 
-        bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < weaponRange; } }
+        bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < weapon.Range; } }
         
         void Start()
         {
@@ -87,7 +85,7 @@ namespace RPG.Combat
         {
             if (targetHealth)
             {
-                targetHealth.TakeDamage(weaponDamage);
+                targetHealth.TakeDamage(weapon.Damage);
             }            
         }
 
