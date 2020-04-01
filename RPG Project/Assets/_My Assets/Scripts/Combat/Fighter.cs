@@ -4,16 +4,16 @@ using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
 using RPG.Characters;
+using RPG.My.Saving;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, IMySaveable
     {        
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] Weapon defaultWeapon = null;
-        [SerializeField] string defaultWeaponName = "Unarmed";
+        [SerializeField] Weapon defaultWeapon = null;        
 
         Mover mover;
         CharacterAnimatorHandler myAnimator;
@@ -27,19 +27,23 @@ namespace RPG.Combat
         Weapon currentWeapon = null;
 
         bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < currentWeapon.Range; } }
-        
-        void Start()
+
+        void Awake()
         {
             mover = GetComponent<Mover>();
             myAnimator = GetComponent<CharacterAnimatorHandler>();
             actionScheduler = GetComponent<ActionScheduler>();
-
-            isChasing = false;
-
-            Weapon weapon = Resources.Load<Weapon>(defaultWeaponName);
-            EquipWeapon(weapon);
         }
-        
+
+        void Start()
+        {            
+            isChasing = false;
+            if (!currentWeapon)
+            {
+                EquipWeapon(defaultWeapon);
+            }
+        }
+
         void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
@@ -60,6 +64,12 @@ namespace RPG.Combat
                     AttackBehaviour();
                 }
             }
+        }
+
+        void SetupWeapon(string weaponName)
+        {
+            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            EquipWeapon(weapon);
         }
 
         public void EquipWeapon(Weapon weapon)
@@ -153,5 +163,14 @@ namespace RPG.Combat
             CancelAttack();
         }
 
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            SetupWeapon((string)state);
+        }
     }
 }
