@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   projectile: {fileID: 289097944386520028, guid: 2beb0c44491337248bd2fe6461989eb0,
     type: 3}
-  damage: 4
+  damage: 50
   range: 12
   animatorOverride: {fileID: 22100000, guid: e7adef90140ed9c42b92462b664281a4, type: 2}
   isRightHanded: 0
