@@ -4790,6 +4790,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1250139558963929847, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
         type: 3}
+      propertyPath: destroyOnHit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250139558963929847, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
+        type: 3}
       propertyPath: isHoming
       value: 1
       objectReference: {fileID: 0}
@@ -4804,6 +4809,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2302457091073469191, guid: 69d1b1037536b504884c93bb73d662db,
         type: 3}
+    - target: {fileID: 1250139558963929847, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
+        type: 3}
+      propertyPath: destroyOnHit.Array.data[0]
+      value: 
+      objectReference: {fileID: 8536285233010402729}
+    - target: {fileID: 1250139558963929847, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
+        type: 3}
+      propertyPath: lifeAfterImpact
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4633454027184206632, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,6 +9,9 @@ namespace RPG.Combat
         [SerializeField] float speed = 4.5f;
         [SerializeField] bool isHoming = false;
         [SerializeField] ParticleSystem hitEffect = null;
+        [SerializeField] float maxLifeTime = 10f;
+        [SerializeField] GameObject[] destroyOnHit = null;
+        [SerializeField] float lifeAfterImpact = 1.25f;
 
         float damage = 0;
         Health target = null;
@@ -40,7 +43,7 @@ namespace RPG.Combat
         void Start()
         {
             transform.LookAt(GetAimLocation());
-            Destroy(gameObject, 5.5f);
+            Destroy(gameObject, maxLifeTime);
         }
 
         #endregion
@@ -63,12 +66,20 @@ namespace RPG.Combat
             if (other.GetComponent<Health>() == target && target.IsAlive)
             {
                 target.TakeDamage(damage);
+                speed = 0;
+
                 if (hitEffect)
                 {
                     ParticleSystem effct = Instantiate(hitEffect, GetAimLocation(), transform.rotation);
-                    Destroy(effct, effct.main.duration + 1.25f);
+                    //Destroy(effct, effct.main.duration + 1.25f);//OR The Code in DestroyAfterEffect
                 }
-                Destroy(gameObject);
+
+                for (int i = 0; i < destroyOnHit.Length; i++)
+                {
+                    Destroy(destroyOnHit[i]);
+                }
+
+                Destroy(gameObject, lifeAfterImpact);
             }
         }
 
