@@ -8,6 +8,8 @@ namespace RPG.Combat
 	[CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
 	public class Weapon : ScriptableObject
 	{
+		const string weaponName = "Weapon";
+
 		[SerializeField] WeaponPrefab weaponPrefab = null;//OR [SerializeField] GameObject equippedPrefab = null;
 		[SerializeField] Projectile projectile = null;
 		[SerializeField] float damage = 5f;
@@ -21,11 +23,27 @@ namespace RPG.Combat
 		public float Range { get => range;}
 		public bool HasProjectile { get { return projectile; } }
 
-		public void Spawn(Transform rightHand, Transform LeftHand, CharacterAnimatorHandler animatorHandler)
+		public void Spawn(Transform rightHand, Transform leftHand, CharacterAnimatorHandler animatorHandler)
 		{
-			if(!weaponPrefab || !animatorOverride) { return; }
-			Instantiate(weaponPrefab, GetAHand(rightHand, LeftHand));
+			DestroyOldWeapon(rightHand, leftHand);
+
+			if (!weaponPrefab || !animatorOverride) { return; }
+			WeaponPrefab weapon = Instantiate(weaponPrefab, GetAHand(rightHand, leftHand));
+			weapon.name = weaponName;
 			animatorHandler.AnimatorControllerSwicher(animatorOverride);
+		}
+
+		void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+		{
+			Transform oldWeapon = rightHand.Find(weaponName);
+			if (!oldWeapon)
+			{
+				oldWeapon = leftHand.Find(weaponName);
+			}
+			if (!oldWeapon) { return; }
+
+			oldWeapon.name = "DESTROYING";
+			Destroy(oldWeapon.gameObject);
 		}
 
 		public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
