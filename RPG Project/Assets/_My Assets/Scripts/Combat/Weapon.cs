@@ -48,6 +48,7 @@ namespace RPG.Combat
 			}
 			if (!oldWeapon) { return; }
 
+			//Name Change is for Fixig search and frame issues and makes sure the right weapons are destroyed.
 			oldWeapon.name = "DESTROYING";
 			Destroy(oldWeapon.gameObject);
 		}

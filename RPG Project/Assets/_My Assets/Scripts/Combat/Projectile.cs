@@ -8,6 +8,7 @@ namespace RPG.Combat
     {
         [SerializeField] float speed = 4.5f;
         [SerializeField] bool isHoming = false;
+        [SerializeField] ParticleSystem hitEffect = null;
 
         float damage = 0;
         Health target = null;
@@ -62,6 +63,11 @@ namespace RPG.Combat
             if (other.GetComponent<Health>() == target && target.IsAlive)
             {
                 target.TakeDamage(damage);
+                if (hitEffect)
+                {
+                    ParticleSystem effct = Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+                    Destroy(effct, effct.main.duration + 1.25f);
+                }
                 Destroy(gameObject);
             }
         }
