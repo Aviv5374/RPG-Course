@@ -27,10 +27,16 @@ namespace RPG.Combat
 		{
 			DestroyOldWeapon(rightHand, leftHand);
 
-			if (!weaponPrefab || !animatorOverride) { return; }
-			WeaponPrefab weapon = Instantiate(weaponPrefab, GetAHand(rightHand, leftHand));
-			weapon.name = weaponName;
-			animatorHandler.AnimatorControllerSwicher(animatorOverride);
+			if (weaponPrefab) 
+			{
+				WeaponPrefab weapon = Instantiate(weaponPrefab, GetAHand(rightHand, leftHand));
+				weapon.name = weaponName;
+			}
+
+			if(animatorOverride) 
+			{
+				animatorHandler.AnimatorControllerSwicher(animatorOverride);
+			}
 		}
 
 		void DestroyOldWeapon(Transform rightHand, Transform leftHand)

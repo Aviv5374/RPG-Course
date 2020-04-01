@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71e4273d730162f4fba558f657f7af0b, type: 3}
-  m_Name: Bow Blue
+  m_Name: Fairball
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 6519259353166479509, guid: c721af6db4b643c42b4987a194409679,
+  weaponPrefab: {fileID: 0}
+  projectile: {fileID: 338657214877941903, guid: 808896f935c7c3540b531d4f952109fc,
     type: 3}
-  projectile: {fileID: 289097944386520028, guid: 2beb0c44491337248bd2fe6461989eb0,
-    type: 3}
-  damage: 7
-  range: 12
-  animatorOverride: {fileID: 22100000, guid: e7adef90140ed9c42b92462b664281a4, type: 2}
+  damage: 5
+  range: 10
+  animatorOverride: {fileID: 22100000, guid: 82fdd52f84c49024fb3449d901d7da01, type: 2}
   isRightHanded: 0

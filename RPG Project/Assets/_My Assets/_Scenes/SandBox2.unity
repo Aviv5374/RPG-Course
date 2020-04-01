@@ -113,6 +113,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 081a83444a4dc5a4f86d8e948efb769d, type: 2}
+--- !u!1001 &69893147
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1714059706}
+    m_Modifications:
+    - target: {fileID: 1134695442965099354, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_Name
+      value: Fairball Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.928175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.100334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a23377eb952a2a847b6b1356ad948bef, type: 3}
+--- !u!4 &69893148 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8529942926809146472, guid: a23377eb952a2a847b6b1356ad948bef,
+    type: 3}
+  m_PrefabInstance: {fileID: 69893147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &132780638
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Archer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8242483169693098130, guid: 1e661cfc62d0fca438436a428c1a2573,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8242483169693098134, guid: 1e661cfc62d0fca438436a428c1a2573,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -711,7 +791,7 @@ PrefabInstance:
     - target: {fileID: 6307054093603317976, guid: b5aaf5ea8da97924880506c6041dfda5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6307054093603317980, guid: b5aaf5ea8da97924880506c6041dfda5,
         type: 3}
@@ -809,6 +889,7 @@ Transform:
   m_Children:
   - {fileID: 1120260028}
   - {fileID: 1394582993}
+  - {fileID: 69893148}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
