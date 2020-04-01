@@ -35,7 +35,16 @@ namespace RPG.Characters
 
         public virtual void AnimatorControllerSwicher(AnimatorOverrideController animatorOverride)
         {
-            myAnimator.runtimeAnimatorController = animatorOverride;
+            var overrideController = myAnimator.runtimeAnimatorController as AnimatorOverrideController;
+            if (animatorOverride)
+            {
+                myAnimator.runtimeAnimatorController = animatorOverride;
+            }
+            else if (overrideController)
+            {
+                myAnimator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+            }
+            
         }
 
         //TODO:Maybe private Update is Better? DO i need the Update method????

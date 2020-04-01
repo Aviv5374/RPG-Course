@@ -33,10 +33,7 @@ namespace RPG.Combat
 				weapon.name = weaponName;
 			}
 
-			if(animatorOverride) 
-			{
-				animatorHandler.AnimatorControllerSwicher(animatorOverride);
-			}
+			animatorHandler.AnimatorControllerSwicher(animatorOverride);	
 		}
 
 		void DestroyOldWeapon(Transform rightHand, Transform leftHand)
