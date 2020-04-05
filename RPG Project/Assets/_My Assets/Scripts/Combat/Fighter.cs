@@ -28,6 +28,7 @@ namespace RPG.Combat
         Weapon currentWeapon = null;
 
         bool IsInRange { get { return Vector3.Distance(transform.position, target.position) < currentWeapon.Range; } }
+        public Health TargetHealth { get => targetHealth; }
 
         void Awake()
         {
@@ -53,7 +54,7 @@ namespace RPG.Combat
 
             if (target)
             {
-                if (targetHealth.HealthPoints <= 0) return;
+                if (TargetHealth.HealthPoints <= 0) return;
 
                 if (!IsInRange)
                 {
@@ -99,15 +100,15 @@ namespace RPG.Combat
         #region Animation Events
         void Hit()
         {
-            if (targetHealth)
+            if (TargetHealth)
             {
                 if (currentWeapon.HasProjectile)
                 {
-                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, targetHealth);
+                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, TargetHealth);
                 }
                 else 
                 {
-                    targetHealth.TakeDamage(currentWeapon.Damage);
+                    TargetHealth.TakeDamage(currentWeapon.Damage);
                 }
             }            
         }
