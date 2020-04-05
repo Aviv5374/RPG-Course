@@ -5,8 +5,9 @@ using RPG.Characters;
 using RPG.Core;
 using RPG.Saving;
 using RPG.My.Saving;
+using RPG.Stats;
 
-namespace RPG.Combat
+namespace RPG.Resources
 {
     public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
@@ -21,6 +22,7 @@ namespace RPG.Combat
         void Start()
         {
             SetComponent();
+            healthPoints = GetComponent<BaseStats>().GetHealth();
         }
 
         void SetComponent()

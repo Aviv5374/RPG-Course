@@ -5,6 +5,7 @@ using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Characters.Player;
+using RPG.Resources;
 
 namespace RPG.Control
 {

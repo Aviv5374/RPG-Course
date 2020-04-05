@@ -14,6 +14,21 @@ namespace RPG.Stats
         {
             [SerializeField] CharacterClass characterClass;
             [SerializeField] float[] health;
+
+            public CharacterClass CharacterClass { get => characterClass; }
+            public float[] Health { get => health; }
+        }
+
+        public float GetHealth(CharacterClass characterClass, int level)
+        {
+            for (int i = 0; i < characterClasses.Length; i++)
+            {
+                if (characterClasses[i].CharacterClass == characterClass)
+                {
+                    return characterClasses[i].Health[level - 1];
+                }
+            }
+            return 0;
         }
 
     }
