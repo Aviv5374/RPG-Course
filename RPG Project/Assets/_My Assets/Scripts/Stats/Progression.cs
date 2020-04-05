@@ -33,7 +33,7 @@ namespace RPG.Stats
         {
             for (int index1 = 0; index1 < characterClasses.Length; index1++)
             {
-                if (characterClasses[index1].CharacterClass == characterClass) { continue; }
+                if (characterClasses[index1].CharacterClass != characterClass) { continue; }
 
                 ProgressionStat[] stats = characterClasses[index1].Stats;
 
