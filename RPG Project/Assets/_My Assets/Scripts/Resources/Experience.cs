@@ -8,7 +8,9 @@ namespace RPG.Resources
     public class Experience : MonoBehaviour, IMySaveable
     {
         [SerializeField] float experiencePoints = 0;
-        
+
+        public float ExperiencePoints { get => experiencePoints; }
+
         public void GainExperience(float experience)
         {
             experiencePoints += experience;
