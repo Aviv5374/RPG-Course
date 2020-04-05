@@ -19,12 +19,12 @@ namespace RPG.Resources
         public float HealthPoints { get { return healthPoints; } }
         public bool IsAlive { get { return healthPoints > 0; } }//????
         public bool IsDead { get { return healthPoints <= 0; } }//????
-        public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetHealth()); } }
+        public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetStat(Stat.Health)); } }
 
         void Start()
         {
             SetComponent();
-            healthPoints = myBaseStats.GetHealth();
+            healthPoints = myBaseStats.GetStat(Stat.Health);
         }
 
         void SetComponent()
@@ -58,7 +58,7 @@ namespace RPG.Resources
             Experience experience = instigator.GetComponent<Experience>();
             if (experience == null) { return; }
 
-            experience.GainExperience(myBaseStats.GetExperienceReward());
+            experience.GainExperience(myBaseStats.GetStat(Stat.ExperienceReward));
         }
 
         void DeathCheack()

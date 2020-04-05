@@ -13,29 +13,45 @@ namespace RPG.Stats
         class ProgressionCharacterClass
         {
             [SerializeField] CharacterClass characterClass;
-            [SerializeField] ProgressionStat[] stats; 
-            //[SerializeField] float[] health;
+            [SerializeField] ProgressionStat[] stats;             
 
-            public CharacterClass CharacterClass { get => characterClass; }
-            //public float[] Health { get => health; }
+            public CharacterClass CharacterClass { get => characterClass; }            
             public ProgressionStat[] Stats { get => stats; }
         }
 
         [System.Serializable]
         class ProgressionStat
         {
-            public Stat stat;
-            public float[] levels;
+            [SerializeField] Stat stat;
+            [SerializeField] float[] levels;
+
+            public Stat Stat { get => stat;}
+            public float[] Levels { get => levels; }
         }
 
-            public float GetHealth(CharacterClass characterClass, int level)
+        public float GetStat(Stat stat, CharacterClass characterClass, int level)
         {
-            for (int i = 0; i < characterClasses.Length; i++)
+            for (int index1 = 0; index1 < characterClasses.Length; index1++)
             {
-                if (characterClasses[i].CharacterClass == characterClass)
+                if (characterClasses[index1].CharacterClass == characterClass) { continue; }
+
+                ProgressionStat[] stats = characterClasses[index1].Stats;
+
+                for (int index2 = 0; index2 < stats.Length; index2++)
                 {
-                    //return characterClasses[i].Health[level - 1];
+                    #region option 1
+                    //if(stats[index2].Stat != stat) { continue; }
+                    //if (level <= -1) { continue; }
+                    //if (level > stats[index2].Levels.Length) { continue; }
+                    #endregion
+
+                    bool isLevelInRange = level > -1 && level <= stats[index2].Levels.Length;
+                    if (stats[index2].Stat == stat && isLevelInRange)
+                    {
+                        return stats[index2].Levels[level - 1];
+                    }
                 }
+
             }
             return 0;
         }

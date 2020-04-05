@@ -20,12 +20,6 @@ MonoBehaviour:
       - 100
       - 150
       - 175
-    - stat: 1
-      levels: []
-    health:
-    - 100
-    - 150
-    - 175
   - characterClass: 2
     stats:
     - stat: 0
@@ -33,12 +27,9 @@ MonoBehaviour:
       - 35
       - 70
       - 140
-    - stat: 0
-      levels: []
-    health:
-    - 35
-    - 70
-    - 140
+    - stat: 1
+      levels:
+      - 25
   - characterClass: 5
     stats:
     - stat: 0
@@ -46,9 +37,6 @@ MonoBehaviour:
       - 25
       - 50
       - 75
-    - stat: 0
-      levels: []
-    health:
-    - 25
-    - 50
-    - 75
+    - stat: 1
+      levels:
+      - 20
