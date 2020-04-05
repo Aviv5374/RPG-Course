@@ -14,15 +14,17 @@ namespace RPG.Resources
         [SerializeField] float healthPoints = 100f;
         CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
+        BaseStats myBaseStats;
 
         public float HealthPoints { get { return healthPoints; } }
         public bool IsAlive { get { return healthPoints > 0; } }//????
         public bool IsDead { get { return healthPoints <= 0; } }//????
+        public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetHealth()); } }
 
         void Start()
         {
             SetComponent();
-            healthPoints = GetComponent<BaseStats>().GetHealth();
+            healthPoints = myBaseStats.GetHealth();
         }
 
         void SetComponent()
@@ -34,6 +36,10 @@ namespace RPG.Resources
             if (!actionScheduler)
             {
                 actionScheduler = GetComponent<ActionScheduler>();
+            }
+            if (!myBaseStats)
+            {
+                myBaseStats = GetComponent<BaseStats>();
             }
         }
 
