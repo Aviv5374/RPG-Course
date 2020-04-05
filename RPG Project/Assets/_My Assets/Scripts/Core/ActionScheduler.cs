@@ -10,7 +10,7 @@ namespace RPG.Core
 				
 		void Start()
 		{
-
+			
 		}
 				
 		public void StartAction(IAction newAction)
