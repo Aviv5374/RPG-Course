@@ -16,6 +16,7 @@ namespace RPG.Combat
 
         float damage = 0;
         Health target = null;
+        GameObject instigator = null;
         CapsuleCollider targetCapsule = null;
 
         CapsuleCollider TargetCapsule 
@@ -33,6 +34,7 @@ namespace RPG.Combat
 
         public Health Target { get => target; set => target = value; }
         public float Damage { get => damage; set => damage = value; }
+        public GameObject Instigator { get => instigator; set => instigator = value; }
 
         #region Initialization
 
@@ -66,7 +68,7 @@ namespace RPG.Combat
         {
             if (other.GetComponent<Health>() == target && target.IsAlive)
             {
-                target.TakeDamage(damage);
+                target.TakeDamage(instigator, damage);
                 speed = 0;
 
                 if (hitEffect)

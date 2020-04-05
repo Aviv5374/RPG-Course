@@ -35,11 +35,11 @@ namespace RPG.Resources
             enemyHealth = playerFighter.TargetHealth;
             if (!enemyHealth)
             {
-                healthValueText.text = "N/A";
+                healthValueText.text = "N/A";                
             }
             else
             {
-                healthValueText.text = string.Format("{0:0.0}%", enemyHealth.HealthPercentage.ToString());
+                healthValueText.text = string.Format("{0:0.0}%", enemyHealth.HealthPercentage);
             }
         }
 

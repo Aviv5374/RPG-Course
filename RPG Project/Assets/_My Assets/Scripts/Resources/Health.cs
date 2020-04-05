@@ -43,14 +43,22 @@ namespace RPG.Resources
             }
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(GameObject instigator, float damage)
         {
             if (IsAlive)
             {
                 healthPoints = Mathf.Max(healthPoints - damage, 0);
-                //Debug.Log(name + " health " + healthPoints);
-                DeathCheack();
+                //Debug.Log(name + " TakeDamage Form " + instigator.name);
+                DeathCheack(instigator);               
             }
+        }
+
+        void AwardExperience(GameObject instigator)
+        {
+            Experience experience = instigator.GetComponent<Experience>();
+            if (experience == null) { return; }
+
+            experience.GainExperience(myBaseStats.GetExperienceReward());
         }
 
         void DeathCheack()
@@ -59,7 +67,18 @@ namespace RPG.Resources
             {
                 SetComponent();
                 myAnimator.TriggerDeath();                
+                actionScheduler.CancelCurrentAction();//?????                
+            }
+        }
+
+        void DeathCheack(GameObject instigator)
+        {
+            if (IsDead)
+            {
+                SetComponent();
+                myAnimator.TriggerDeath();
                 actionScheduler.CancelCurrentAction();//?????
+                AwardExperience(instigator);
             }
         }
 

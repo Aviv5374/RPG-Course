@@ -104,11 +104,11 @@ namespace RPG.Combat
             {
                 if (currentWeapon.HasProjectile)
                 {
-                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, TargetHealth);
+                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, TargetHealth, gameObject);
                 }
                 else 
                 {
-                    TargetHealth.TakeDamage(currentWeapon.Damage);
+                    TargetHealth.TakeDamage(gameObject, currentWeapon.Damage);
                 }
             }            
         }

@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using RPG.Control;
 
 namespace RPG.Resources
 {
-    public class HealthDisplay : MonoBehaviour
+    public class Experience : MonoBehaviour
     {
-        [SerializeField] Text healthValueText = null;
+        [SerializeField] float experiencePoints = 0;
 
-        Health playerHealth;
+        public void GainExperience(float experience)
+        {
+            experiencePoints += experience;
+        }
 
         #region Initialization
 
@@ -21,7 +22,7 @@ namespace RPG.Resources
 
         void Start()
         {
-            playerHealth = FindObjectOfType<PlayerController>().GetComponent<Health>();
+
         }
 
         #endregion
@@ -30,7 +31,7 @@ namespace RPG.Resources
 
         void Update()
         {
-            healthValueText.text = string.Format("{0:0.0}%", playerHealth.HealthPercentage);
+
         }
 
         #endregion
