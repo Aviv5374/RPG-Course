@@ -6,6 +6,7 @@ using RPG.Core;
 using RPG.Characters;
 using RPG.My.Saving;
 using RPG.Resources;
+using RPG.Stats;
 
 namespace RPG.Combat
 {
@@ -19,6 +20,7 @@ namespace RPG.Combat
         Mover mover;
         CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
+        BaseStats myBaseStats;
         Transform target;
         Health targetHealth;
 
@@ -35,6 +37,7 @@ namespace RPG.Combat
             mover = GetComponent<Mover>();
             myAnimator = GetComponent<CharacterAnimatorHandler>();
             actionScheduler = GetComponent<ActionScheduler>();
+            myBaseStats = GetComponent<BaseStats>();
         }
 
         void Start()
@@ -102,13 +105,15 @@ namespace RPG.Combat
         {
             if (TargetHealth)
             {
+                float damage = myBaseStats.GetStat(Stat.Damage);
+
                 if (currentWeapon.HasProjectile)
                 {
-                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, TargetHealth, gameObject);
+                    currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, TargetHealth, gameObject, damage);
                 }
                 else 
                 {
-                    TargetHealth.TakeDamage(gameObject, currentWeapon.Damage);
+                    TargetHealth.TakeDamage(gameObject, damage);
                 }
             }            
         }

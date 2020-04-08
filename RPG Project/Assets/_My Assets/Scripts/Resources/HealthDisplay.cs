@@ -9,6 +9,7 @@ namespace RPG.Resources
     public class HealthDisplay : MonoBehaviour
     {
         [SerializeField] Text healthValueText = null;
+        [SerializeField] bool showPercent = false;
 
         Health playerHealth;
 
@@ -30,7 +31,16 @@ namespace RPG.Resources
 
         void Update()
         {
-            healthValueText.text = string.Format("{0:0.0}%", playerHealth.HealthPercentage);
+            string format;
+            if (showPercent)
+            {
+                format = string.Format("{0:0.0}%", playerHealth.HealthPercentage);
+            }
+            else
+            {
+                format = string.Format("{0:0}/{1:0}", playerHealth.HealthPoints, playerHealth.MaxHealthPoints); 
+            }
+            healthValueText.text = format;
         }
 
         #endregion

@@ -10,6 +10,7 @@ namespace RPG.Resources
     public class EnemyHealthDisplay : MonoBehaviour
     {
         [SerializeField] Text healthValueText = null;
+        [SerializeField] bool showPercent = false;
 
         Fighter playerFighter;
         Health enemyHealth;
@@ -33,14 +34,23 @@ namespace RPG.Resources
         void Update()
         {
             enemyHealth = playerFighter.TargetHealth;
+            string format;
             if (!enemyHealth)
             {
-                healthValueText.text = "N/A";                
+                format = "N/A";                
             }
             else
             {
-                healthValueText.text = string.Format("{0:0.0}%", enemyHealth.HealthPercentage);
+                if (showPercent)
+                {
+                    format = string.Format("{0:0.0}%", enemyHealth.HealthPercentage);
+                }
+                else
+                {
+                    format = string.Format("{0:0}/{1:0}", enemyHealth.HealthPoints, enemyHealth.MaxHealthPoints);
+                }
             }
+            healthValueText.text = format;
         }
 
         #endregion

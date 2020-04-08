@@ -34,8 +34,9 @@ namespace RPG.Resources
         public float HealthPoints { get { return healthPoints; } }
         public bool IsAlive { get { return healthPoints > 0; } }//????
         public bool IsDead { get { return healthPoints <= 0; } }//????
-        public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetStat(Stat.Health)); } }
-        float RegenHealthPoints { get { return myBaseStats.GetStat(Stat.Health) * (regenerationPercentage / 100); } }
+        public float MaxHealthPoints { get { return myBaseStats.GetStat(Stat.Health); } }
+        public float HealthPercentage { get { return 100 * (healthPoints / MaxHealthPoints); } }
+        float RegenHealthPoints { get { return MaxHealthPoints * (regenerationPercentage / 100); } }
 
         public event Action onDeathTest;
 
@@ -73,7 +74,7 @@ namespace RPG.Resources
 
         void RegenerateFullHealth()
         {
-            healthPoints = myBaseStats.GetStat(Stat.Health);
+            healthPoints = MaxHealthPoints;
         }
 
         void RegenerateHealth()
@@ -103,7 +104,7 @@ namespace RPG.Resources
         {
             if (IsDead)
             {
-                onDeathTest();
+                //onDeathTest();
                 SetComponent();
                 myAnimator.TriggerDeath();                
                 actionScheduler.CancelCurrentAction();//?????                
@@ -114,7 +115,7 @@ namespace RPG.Resources
         {
             if (IsDead)
             {
-                onDeathTest();
+                //onDeathTest();
                 SetComponent();
                 myAnimator.TriggerDeath();
                 actionScheduler.CancelCurrentAction();//?????
