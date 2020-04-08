@@ -9,12 +9,10 @@ using RPG.Resources;
 
 namespace RPG.Control
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : CharacterController
     {
         Camera mainCamera;
-        Mover mover;
-        Health health;
-        Fighter fighter;
+        
         ActionScheduler actionScheduler;
         CombatTarget myCombatTarget;
         //PlayerAnimatorHandler myAnimator;????
@@ -23,12 +21,12 @@ namespace RPG.Control
 
         public CombatTarget CombatTarget { get { return myCombatTarget; } }
 
-        void Start()
+        protected override void Start()
         {
-            mainCamera = Camera.main;
-            mover = GetComponent<Mover>();
-            health = GetComponent<Health>();
-            fighter = GetComponent<Fighter>();
+            base.Start();
+            health.onDeathTest += PlayerDeathTest;
+            //health.onDeathTest += DeathTest;
+            mainCamera = Camera.main;            
             actionScheduler = GetComponent<ActionScheduler>();
             myCombatTarget = GetComponent<CombatTarget>();
             //myAnimator = GetComponent<PlayerAnimatorHandler>();?????
@@ -93,6 +91,17 @@ namespace RPG.Control
         public void CancelCurrentAction()
         {
             actionScheduler.CancelCurrentAction();
+        }
+
+        protected override void DeathTest()
+        {
+            Debug.Log("DeathTest2 in " + typeof(PlayerController).Name);
+            base.DeathTest();
+        }
+
+        void PlayerDeathTest()
+        {
+            Debug.Log("DeathTest in Player");
         }
     }
 }

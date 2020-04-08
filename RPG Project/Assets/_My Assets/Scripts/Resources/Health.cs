@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Characters;
@@ -35,6 +36,8 @@ namespace RPG.Resources
         public bool IsDead { get { return healthPoints <= 0; } }//????
         public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetStat(Stat.Health)); } }
         float RegenHealthPoints { get { return myBaseStats.GetStat(Stat.Health) * (regenerationPercentage / 100); } }
+
+        public event Action onDeathTest;
 
         void Awake()
         {
@@ -84,7 +87,7 @@ namespace RPG.Resources
             {
                 healthPoints = Mathf.Max(healthPoints - damage, 0);
                 //Debug.Log(name + " TakeDamage Form " + instigator.name);
-                DeathCheack(instigator);               
+                DeathCheack(instigator);                
             }
         }
 
@@ -100,6 +103,7 @@ namespace RPG.Resources
         {
             if (IsDead)
             {
+                onDeathTest();
                 SetComponent();
                 myAnimator.TriggerDeath();                
                 actionScheduler.CancelCurrentAction();//?????                
@@ -110,6 +114,7 @@ namespace RPG.Resources
         {
             if (IsDead)
             {
+                onDeathTest();
                 SetComponent();
                 myAnimator.TriggerDeath();
                 actionScheduler.CancelCurrentAction();//?????
