@@ -30,23 +30,6 @@ namespace RPG.Stats
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
 
         Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
-        
-        public float GetStat(Stat stat, CharacterClass characterClass, int level)
-        {
-            BuildLookup();
-
-            float[] levels = lookupTable[characterClass][stat];
-            bool isLevelInRange = level > -1 && level <= levels.Length;
-
-            if (isLevelInRange)
-            {
-                return levels[level - 1];
-            }
-            else
-            {
-                return 0;
-            }            
-        }
 
         void BuildLookup()
         {
@@ -65,6 +48,31 @@ namespace RPG.Stats
 
                 lookupTable[characterClasses[index1].CharacterClass] = statLookupTable;
             }
+        }
+
+        public float GetStat(Stat stat, CharacterClass characterClass, int level)
+        {
+            BuildLookup();
+
+            float[] levels = lookupTable[characterClass][stat];
+            bool isLevelInRange = level > -1 && level <= levels.Length;
+
+            if (isLevelInRange)
+            {
+                return levels[level - 1];
+            }
+            else
+            {
+                return 0;
+            }            
+        }
+        
+        public int GetLevelsLength(Stat stat, CharacterClass characterClass)
+        {
+            BuildLookup();
+
+            float[] levels = lookupTable[characterClass][stat];
+            return levels.Length;
         }
 
     }

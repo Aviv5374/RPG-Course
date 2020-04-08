@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.My.Saving;
 
-namespace RPG.Resources
+namespace RPG.Stats
 {
     public class Experience : MonoBehaviour, IMySaveable
     {

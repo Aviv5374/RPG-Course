@@ -21,9 +21,13 @@ namespace RPG.Resources
         public bool IsDead { get { return healthPoints <= 0; } }//????
         public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetStat(Stat.Health)); } }
 
-        void Start()
+        void Awake()
         {
             SetComponent();
+        }
+
+        void Start()
+        {            
             healthPoints = myBaseStats.GetStat(Stat.Health);
         }
 
