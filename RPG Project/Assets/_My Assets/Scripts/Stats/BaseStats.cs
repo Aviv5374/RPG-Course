@@ -54,10 +54,7 @@ namespace RPG.Stats
 
         void Update()
         {
-            if (gameObject.tag == "Player")
-            {
-                Debug.Log(GetLevel());
-            }
+            
         }
 
         #endregion
