@@ -52,13 +52,26 @@ namespace RPG.Stats
         }
 
         #endregion
-            
-        public float GetStat(Stat stat)
+
+        float GetAdditiveModifier(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, CurrentLevel);
+            float total = 0;
+            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach (float modifier in provider.GetAdditiveModifier(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
         }
 
-        public int CalculateLevel()
+        public float GetStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, CurrentLevel) + GetAdditiveModifier(stat);
+        }
+
+        int CalculateLevel()
         {
             if (experience == null) { return startingLevel; }
 

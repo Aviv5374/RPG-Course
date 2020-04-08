@@ -10,7 +10,7 @@ using RPG.Stats;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, IMySaveable
+    public class Fighter : MonoBehaviour, IAction, IMySaveable, IModifierProvider
     {        
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
@@ -178,6 +178,14 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             SetupWeapon((string)state);
+        }
+
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.Damage;
+            }
         }
     }
 }
