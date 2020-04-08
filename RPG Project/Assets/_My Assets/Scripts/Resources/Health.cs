@@ -12,6 +12,7 @@ namespace RPG.Resources
     public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
         [SerializeField] float healthPoints = -1f;
+        [SerializeField] float regenerationPercentage = 70;
         CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
         BaseStats myBaseStats;
@@ -33,6 +34,7 @@ namespace RPG.Resources
         public bool IsAlive { get { return healthPoints > 0; } }//????
         public bool IsDead { get { return healthPoints <= 0; } }//????
         public float HealthPercentage { get { return 100 * (healthPoints / myBaseStats.GetStat(Stat.Health)); } }
+        float RegenHealthPoints { get { return myBaseStats.GetStat(Stat.Health) * (regenerationPercentage / 100); } }
 
         void Awake()
         {
@@ -41,10 +43,13 @@ namespace RPG.Resources
 
         void Start()
         {
+            myBaseStats.onLevelUp += RegenerateHealth;
+
             if (healthPoints < 0)
             {
-                healthPoints = myBaseStats.GetStat(Stat.Health);
+                RegenerateFullHealth();
             }
+
         }
 
         void SetComponent()
@@ -61,6 +66,16 @@ namespace RPG.Resources
             {
                 myBaseStats = GetComponent<BaseStats>();
             }
+        }
+
+        void RegenerateFullHealth()
+        {
+            healthPoints = myBaseStats.GetStat(Stat.Health);
+        }
+
+        void RegenerateHealth()
+        {            
+            healthPoints = Mathf.Max(healthPoints, RegenHealthPoints);
         }
 
         public void TakeDamage(GameObject instigator, float damage)
