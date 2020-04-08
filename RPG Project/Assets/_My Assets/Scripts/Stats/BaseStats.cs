@@ -12,6 +12,7 @@ namespace RPG.Stats
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpParticleEffect = null;
+        [SerializeField] bool shouldUseModifiers = false;
 
         Experience experience = null;
 
@@ -53,22 +54,48 @@ namespace RPG.Stats
 
         #endregion
 
+        public float GetStat(Stat stat)
+        {
+                                                                 //????????????????????????????????????????
+            return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
+        }
+
+        float GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, CurrentLevel);
+        }
+
         float GetAdditiveModifier(Stat stat)
         {
             float total = 0;
-            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
+            if (shouldUseModifiers)
             {
-                foreach (float modifier in provider.GetAdditiveModifier(stat))
+                foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
                 {
-                    total += modifier;
+                    foreach (float modifier in provider.GetAdditiveModifiers(stat))
+                    {
+                        total += modifier;
+                    }
                 }
             }
             return total;
         }
 
-        public float GetStat(Stat stat)
+        float GetPercentageModifier(Stat stat)//???????
         {
-            return progression.GetStat(stat, characterClass, CurrentLevel) + GetAdditiveModifier(stat);
+            float total = 0;
+            if (shouldUseModifiers)
+            {
+                foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
+                {
+                    foreach (float modifier in provider.GetPercentageModifiers(stat))
+                    {
+                        total += modifier;
+                    }
+                }
+            }
+            
+            return total;
         }
 
         int CalculateLevel()

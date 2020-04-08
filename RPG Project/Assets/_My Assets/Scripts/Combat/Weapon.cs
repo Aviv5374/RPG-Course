@@ -15,6 +15,8 @@ namespace RPG.Combat
 		[SerializeField] Projectile projectile = null;
 		[SerializeField] float damage = 5f;
 		[SerializeField] float range = 2f;
+		[Header("???????")]
+		[SerializeField] float percentageBonus = 0;//???????
 		[SerializeField] AnimatorOverrideController animatorOverride = null;
 		//if is a character with 3 hand or more it need to be an enum
 		//What happens if the character has less than two hands? And do you get into a minus hands?
@@ -22,7 +24,9 @@ namespace RPG.Combat
 		
 		public float Damage { get => damage;}
 		public float Range { get => range;}
+		public float PercentageBonus { get => percentageBonus;}
 		public bool HasProjectile { get { return projectile; } }
+
 
 		public void Spawn(Transform rightHand, Transform leftHand, CharacterAnimatorHandler animatorHandler)
 		{
