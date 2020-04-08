@@ -14,18 +14,18 @@ namespace RPG.SceneManagement
 
         CinemachineVirtualCamera virtualCamera;
        
-        MySavingSystem savingSystem;
+        MySavingSystem mySavingSystem;
 
-        MySavingSystem SavingSystem 
+        MySavingSystem MySavingSystem 
         {
             get 
             {
-                if (!savingSystem)
+                if (!mySavingSystem)
                 {
-                    savingSystem = GetComponent<MySavingSystem>();
+                    mySavingSystem = GetComponent<MySavingSystem>();
                 }
 
-                return savingSystem;
+                return mySavingSystem;
             }  
         }
 
@@ -33,7 +33,7 @@ namespace RPG.SceneManagement
         {
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
-            yield return SavingSystem.LoadLastScene(defaultSaveFile);
+            yield return MySavingSystem.LoadLastScene(defaultSaveFile);
             yield return fader.FadeIn(fadeInTime);
         }
 
@@ -51,20 +51,25 @@ namespace RPG.SceneManagement
                 Save();
             }
 
-            //if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    SavingSystem.Delete(defaultSaveFile);
-            //}
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Delete();
+            }
         }
 
         public void Save()
         {
-            SavingSystem.Save(defaultSaveFile);
+            MySavingSystem.Save(defaultSaveFile);
         }
 
         public void Load()
         {
-            SavingSystem.Load(defaultSaveFile);
+            MySavingSystem.Load(defaultSaveFile);
+        }
+
+        public void Delete()
+        {
+            MySavingSystem.Delete(defaultSaveFile);
         }
 
         public void ResetPlayerCamera()

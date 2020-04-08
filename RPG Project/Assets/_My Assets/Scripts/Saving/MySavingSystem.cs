@@ -100,9 +100,14 @@ namespace RPG.My.Saving
 
         #endregion
 
-        //public void Delete(string saveFileName)
-        //{
-
-        //}
+        public void Delete(string saveFileName)
+        {
+            string path = GetPathFromSaveFile(saveFileName);
+            if (File.Exists(path))
+            {
+                Debug.Log("Deleting " + saveFileName + " from " + path);
+                File.Delete(path);
+            }
+        }
     }
 }
