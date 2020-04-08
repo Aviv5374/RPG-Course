@@ -29,7 +29,12 @@ namespace RPG.SceneManagement
             }  
         }
 
-        IEnumerator Start()
+        void Awake()
+        {
+            StartCoroutine(LoadLastScene());
+        }
+
+        IEnumerator LoadLastScene()
         {
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
