@@ -30,7 +30,7 @@ namespace RPG.Stats
 
         void Update()
         {
-            levelhValueText.text = string.Format("{0:0}", playerBaseStats.GetLevel());
+            levelhValueText.text = string.Format("{0:0}", playerBaseStats.CurrentLevel);
         }
 
         #endregion

@@ -16,6 +16,19 @@ namespace RPG.Resources
         ActionScheduler actionScheduler;
         BaseStats myBaseStats;
 
+        //Alternative idea to SetComponent()
+        CharacterAnimatorHandler MyAnimator 
+        {
+            get 
+            {
+                if (!myAnimator)
+                {
+                    myAnimator = GetComponent<CharacterAnimatorHandler>();
+                }
+                return myAnimator;
+            }
+        }
+
         public float HealthPoints { get { return healthPoints; } }
         public bool IsAlive { get { return healthPoints > 0; } }//????
         public bool IsDead { get { return healthPoints <= 0; } }//????
