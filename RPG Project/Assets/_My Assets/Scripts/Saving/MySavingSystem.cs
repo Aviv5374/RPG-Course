@@ -60,14 +60,12 @@ namespace RPG.My.Saving
         public IEnumerator LoadLastScene(string saveFileName)
         {
             Dictionary<string, object> state = LoadFile(saveFileName);
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if (state.ContainsKey(lastSceneBuildIndexKey))
             {
-                int buildIndex = (int)state[lastSceneBuildIndexKey];
-                if (buildIndex != SceneManager.GetActiveScene().buildIndex)
-                {
-                    yield return SceneManager.LoadSceneAsync(buildIndex);
-                }
+                buildIndex = (int)state[lastSceneBuildIndexKey];                
             }
+            yield return SceneManager.LoadSceneAsync(buildIndex);
             RestoreState(state);
         }
 
