@@ -37,22 +37,50 @@ namespace RPG.Stats
             }
         }
 
+        public Experience Experience 
+        {
+            get 
+            {
+                if (!experience)
+                {
+                    experience = GetComponent<Experience>();
+                }
+
+                return experience;
+            }
+            
+            private set => experience = value; 
+        }
+
         #region Initialization
 
         void Awake()
         {
-            experience = GetComponent<Experience>();
+            Experience = GetComponent<Experience>();
         }
 
-        void Start()
-        {                       
-            if (experience != null)
+        void OnEnable()
+        {
+            if (Experience != null)
             {
-                experience.onExperienceGained += UpdateLevel;
+                Experience.onExperienceGained += UpdateLevel;
             }
         }
 
+        void Start()
+        {
+            CurrentLevel = CalculateLevel();
+        }
+
         #endregion
+
+        void OnDisable()
+        {
+            if (Experience != null)
+            {
+                Experience.onExperienceGained -= UpdateLevel;
+            }
+        }
 
         public float GetStat(Stat stat)
         {
@@ -100,9 +128,9 @@ namespace RPG.Stats
 
         int CalculateLevel()
         {
-            if (experience == null) { return startingLevel; }
+            if (Experience == null) { return startingLevel; }
 
-            float currentXP = experience.ExperiencePoints;
+            float currentXP = Experience.ExperiencePoints;
             int penultimateLevel = progression.GetLevelsLength(Stat.ExperienceToLevelUp, characterClass);
             for (int level = 1; level <= penultimateLevel; level++)
             {

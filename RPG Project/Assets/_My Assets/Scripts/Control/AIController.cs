@@ -34,13 +34,16 @@ namespace RPG.Control
 
         //bool IsCheckingSometingSuspicion { get}
 
-        void Start()
-        {
+        void Awake()
+        {            
             player = FindObjectOfType<PlayerController>();
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
+        }
 
+        void Start()
+        {
             if (patrolPath)
             {
                 transform.position = CurrentWaypoint;

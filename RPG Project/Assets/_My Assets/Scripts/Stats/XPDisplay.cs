@@ -17,12 +17,12 @@ namespace RPG.Stats
 
         void Awake()
         {
-
+            playerXP = FindObjectOfType<PlayerController>().GetComponent<Experience>();
+            //experienceValueText = GetComponent<Text>();//?????
         }
 
         void Start()
         {
-            playerXP = FindObjectOfType<PlayerController>().GetComponent<Experience>();
         }
 
         #endregion

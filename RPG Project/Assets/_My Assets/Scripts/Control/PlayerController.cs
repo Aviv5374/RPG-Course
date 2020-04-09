@@ -21,15 +21,33 @@ namespace RPG.Control
 
         public CombatTarget CombatTarget { get { return myCombatTarget; } }
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
-            health.onDeathTest += PlayerDeathTest;
-            //health.onDeathTest += DeathTest;
+            base.Awake();
             mainCamera = Camera.main;            
             actionScheduler = GetComponent<ActionScheduler>();
             myCombatTarget = GetComponent<CombatTarget>();
             //myAnimator = GetComponent<PlayerAnimatorHandler>();?????
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            health.onDeathTest += PlayerDeathTest;
+            //health.onDeathTest += DeathTest;
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            health.onDeathTest -= PlayerDeathTest;
+            //health.onDeathTest -= DeathTest;
         }
 
         void Update()

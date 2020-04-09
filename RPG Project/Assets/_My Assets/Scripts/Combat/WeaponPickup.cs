@@ -23,7 +23,7 @@ namespace RPG.Combat
         }
 
         //I prefer EquipWeapon() be called through the PlayerController rather than directly through Fighter
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             PlayerController player = other.GetComponent<PlayerController>();
             if (player)

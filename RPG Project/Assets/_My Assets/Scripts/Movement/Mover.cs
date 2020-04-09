@@ -24,18 +24,19 @@ namespace RPG.Movement
         Fighter fighter;
         ActionScheduler actionScheduler;
 
+        void Awake()
+        {
+            myMeshAgent = GetComponent<NavMeshAgent>();
+            myAnimator = GetComponent<CharacterAnimatorHandler>();
+            health = GetComponent<Health>();
+            fighter = GetComponent<Fighter>();
+            actionScheduler = GetComponent<ActionScheduler>();            
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-            myMeshAgent = GetComponent<NavMeshAgent>();
             myMeshAgent.speed = walkSpeed;
-
-            myAnimator = GetComponent<CharacterAnimatorHandler>();
-
-            health = GetComponent<Health>();
-
-            fighter = GetComponent<Fighter>();
-            actionScheduler = GetComponent<ActionScheduler>();
         }
 
         // Update is called once per frame

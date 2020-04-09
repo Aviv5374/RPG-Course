@@ -19,10 +19,13 @@ namespace RPG.Cinematics
 
         PlayableDirector myPlayableDirector;
 
-        // Start is called before the first frame update
+        void Awake()
+        {            
+            myPlayableDirector = GetComponent<PlayableDirector>();
+        }
+
         void Start()
         {
-            myPlayableDirector = GetComponent<PlayableDirector>();
             //Invoke("EventTest", 0.5f);
         }
 

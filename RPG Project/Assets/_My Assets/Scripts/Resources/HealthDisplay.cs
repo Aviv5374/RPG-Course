@@ -17,12 +17,12 @@ namespace RPG.Resources
 
         void Awake()
         {
-
+            playerHealth = FindObjectOfType<PlayerController>().GetComponent<Health>();
+            //healthValueText = GetComponent<Text>();//?????
         }
 
         void Start()
         {
-            playerHealth = FindObjectOfType<PlayerController>().GetComponent<Health>();
         }
 
         #endregion

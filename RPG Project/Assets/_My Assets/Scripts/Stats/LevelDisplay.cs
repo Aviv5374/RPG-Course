@@ -16,12 +16,12 @@ namespace RPG.Stats
 
         void Awake()
         {
-
+            playerBaseStats = FindObjectOfType<PlayerController>().GetComponent<BaseStats>();
+            //levelhValueText = GetComponent<Text>();//?????
         }
 
         void Start()
         {
-            playerBaseStats = FindObjectOfType<PlayerController>().GetComponent<BaseStats>();
         }
 
         #endregion

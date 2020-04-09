@@ -45,15 +45,22 @@ namespace RPG.Resources
             SetComponent();
         }
 
-        void Start()
+        void OnEnable()
         {
             myBaseStats.onLevelUp += RegenerateHealth;
+        }
 
+        void Start()
+        {            
             if (healthPoints < 0)
             {
                 RegenerateFullHealth();
             }
+        }
 
+        void OnDisable()
+        {
+            myBaseStats.onLevelUp -= RegenerateHealth;
         }
 
         void SetComponent()

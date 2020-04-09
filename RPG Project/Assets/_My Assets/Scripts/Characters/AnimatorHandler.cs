@@ -14,8 +14,7 @@ namespace RPG.Characters
         {
             get { return myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"); }
         }
-
-        // Start is called before the first frame update
+        
         protected virtual void Awake()
         {
             SetMyAnimator();            
@@ -23,10 +22,14 @@ namespace RPG.Characters
 
         void SetMyAnimator()//TODO:FINE Better Method Name
         {
-            if (!myAnimator)//??????
+            //This suppose to be in Awake and just in case also in a property
+            if (!myAnimator)
             {
                 myAnimator = GetComponent<Animator>();
             }
+            //TODO: If myAnimator is still null after GetComponent<Animator>() I am Fuck. Fix it.
+
+            //This suppose to be in Start 
             for (int index = 0; index < myAnimator.parameterCount; index++)
             {
                 myAnimtorParameters.Add(myAnimator.GetParameter(index));

@@ -21,15 +21,21 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
         }
 
-        protected virtual void Start()
+        protected virtual void OnEnable()
         {
             health.onDeathTest += DeathTest;
             health.onDeathTest += CharacterDeathTest;
         }
 
-        void Update()
+        protected virtual void Start()
         {
+            
+        }
 
+        protected virtual void OnDisable()
+        {
+            health.onDeathTest -= DeathTest;
+            health.onDeathTest -= CharacterDeathTest;
         }
 
         protected virtual void DeathTest()
