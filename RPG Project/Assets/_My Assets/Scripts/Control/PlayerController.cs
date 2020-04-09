@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
@@ -15,7 +16,9 @@ namespace RPG.Control
         {
             None,
             Movement,
-            Combat
+            Combat,
+            Dead,
+            UI,
         }
 
         [System.Serializable]
@@ -69,13 +72,28 @@ namespace RPG.Control
 
         void Update()
         {
-            if (health.IsDead) return;
+            if (InteractWithUI()) { return; }
+            if (health.IsDead) 
+            {
+                SetCursor(CursorType.Dead);
+                return; 
+            }
 
             //DOTO: try to Raycast once for all uses
             if (InteractWithCombat()) { return; }
             if (InteractWithMovement()) { return; }
 
             SetCursor(CursorType.None);
+        }
+
+        bool InteractWithUI()
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) 
+            {
+                SetCursor(CursorType.UI);
+                return true;
+            }
+            return false;
         }
 
         bool InteractWithCombat()
