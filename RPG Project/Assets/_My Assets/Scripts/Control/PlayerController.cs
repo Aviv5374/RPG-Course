@@ -11,6 +11,23 @@ namespace RPG.Control
 {
     public class PlayerController : CharacterController
     {
+        enum CursorType
+        {
+            None,
+            Movement,
+            Combat
+        }
+
+        [System.Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] CursorMapping[] cursorMappings = null;
+
         Camera mainCamera;
         
         ActionScheduler actionScheduler;
@@ -56,7 +73,9 @@ namespace RPG.Control
 
             //DOTO: try to Raycast once for all uses
             if (InteractWithCombat()) { return; }
-            if (InteractWithMovement()) { return; }                       
+            if (InteractWithMovement()) { return; }
+
+            SetCursor(CursorType.None);
         }
 
         bool InteractWithCombat()
@@ -74,6 +93,7 @@ namespace RPG.Control
                     fighter.Attack(target);
                     //TODO: I want that myAnimator.TriggerAttack() be here, not in fighter.
                 }
+                SetCursor(CursorType.Combat);
                 return true;
             }
 
@@ -91,9 +111,28 @@ namespace RPG.Control
                     actionScheduler.StartAction(mover);//OR fighter.CancelAttack();                     
                     mover.StartMoveAction(hitInfo.point);
                 }
+                SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        void SetCursor(CursorType type)
+        {
+            CursorMapping mapping = GetCursorMapping(type);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        CursorMapping GetCursorMapping(CursorType type)
+        {
+            for (int i = 0; i < cursorMappings.Length; i++)
+            {
+                if (cursorMappings[i].type == type)
+                {
+                    return cursorMappings[i];
+                }
+            }
+            return cursorMappings[0];
         }
 
         public void StopMoving()
