@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameDevTV.Utils;
 using RPG.Characters;
 using RPG.Core;
 using RPG.Saving;
@@ -12,7 +13,7 @@ namespace RPG.Resources
 {
     public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
-        [SerializeField] float healthPoints = -1f;
+        [SerializeField] LazyValue<float> healthPoints;
         [SerializeField] float regenerationPercentage = 70;
         CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
@@ -31,11 +32,17 @@ namespace RPG.Resources
             }
         }
 
-        public float HealthPoints { get { return healthPoints; } }
-        public bool IsAlive { get { return healthPoints > 0; } }//????
-        public bool IsDead { get { return healthPoints <= 0; } }//????
+        public float HealthPoints 
+        { 
+            get { return healthPoints.value; } 
+
+            private set { healthPoints.value = value; }
+        }
+
+        public bool IsAlive { get { return HealthPoints > 0; } }//????
+        public bool IsDead { get { return HealthPoints <= 0; } }//????
         public float MaxHealthPoints { get { return myBaseStats.GetStat(Stat.Health); } }
-        public float HealthPercentage { get { return 100 * (healthPoints / MaxHealthPoints); } }
+        public float HealthPercentage { get { return 100 * (HealthPoints / MaxHealthPoints); } }
         float RegenHealthPoints { get { return MaxHealthPoints * (regenerationPercentage / 100); } }
 
         public event Action onDeathTest;
@@ -43,6 +50,7 @@ namespace RPG.Resources
         void Awake()
         {
             SetComponent();
+            healthPoints = new LazyValue<float>(RegenerateFullHealth);
         }
 
         void OnEnable()
@@ -51,11 +59,8 @@ namespace RPG.Resources
         }
 
         void Start()
-        {            
-            if (healthPoints < 0)
-            {
-                RegenerateFullHealth();
-            }
+        {
+            healthPoints.ForceInit();
         }
 
         void OnDisable()
@@ -79,21 +84,21 @@ namespace RPG.Resources
             }
         }
 
-        void RegenerateFullHealth()
+        float RegenerateFullHealth()
         {
-            healthPoints = MaxHealthPoints;
+           return MaxHealthPoints;
         }
 
         void RegenerateHealth()
         {            
-            healthPoints = Mathf.Max(healthPoints, RegenHealthPoints);
+            HealthPoints = Mathf.Max(HealthPoints, RegenHealthPoints);
         }
 
         public void TakeDamage(GameObject instigator, float damage)
         {
             if (IsAlive)
             {
-                healthPoints = Mathf.Max(healthPoints - damage, 0);
+                HealthPoints = Mathf.Max(HealthPoints - damage, 0);
                 //Debug.Log(name + " TakeDamage Form " + instigator.name);
                 DeathCheack(instigator);                
             }
@@ -137,7 +142,7 @@ namespace RPG.Resources
 
         public void RestoreState(object state)
         {
-            healthPoints = (float)state;
+            HealthPoints = (float)state;
 
             DeathCheack();
         }
