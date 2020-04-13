@@ -7,6 +7,7 @@ using RPG.Combat;
 using RPG.Core;
 using RPG.Characters.Player;
 using RPG.Resources;
+using System;
 
 namespace RPG.Control
 {
@@ -89,7 +90,7 @@ namespace RPG.Control
 
         bool InteractWithComponent()
         {
-            RaycastHit[] hitsInfo = Physics.RaycastAll(MouseRay);
+            RaycastHit[] hitsInfo = RaycastAllSorted();
             for (int index1 = 0; index1 < hitsInfo.Length; index1++)
             {
                 IRaycastable[] raycastables = hitsInfo[index1].transform.GetComponents<IRaycastable>();
@@ -104,7 +105,19 @@ namespace RPG.Control
             }            
             return false;
         }
-        
+
+        RaycastHit[] RaycastAllSorted()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(MouseRay);
+            float[] distances = new float[hits.Length];
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+            Array.Sort(distances, hits);
+            return hits;
+        }
+
         bool InteractWithMovement()
         {           
             RaycastHit hitInfo;           
