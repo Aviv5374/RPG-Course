@@ -18,7 +18,7 @@ namespace RPG.UI.DamageText
 
         void Start()
         {
-            Spawn(11);
+            
         }
 
         #endregion

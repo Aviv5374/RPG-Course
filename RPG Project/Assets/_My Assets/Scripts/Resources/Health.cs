@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using GameDevTV.Utils;
 using RPG.Characters;
 using RPG.Core;
@@ -15,7 +16,10 @@ namespace RPG.Resources
     {
         [SerializeField] float healthPoints = -1;
         [SerializeField] float regenerationPercentage = 70;
+        [SerializeField] UnityEvent takeDamage;
+
         LazyValue<float> healthPointsLazyValue;
+
         CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
         BaseStats myBaseStats;
@@ -112,6 +116,7 @@ namespace RPG.Resources
             {
                 HealthPoints = Mathf.Max(HealthPoints - damage, 0);
                 //Debug.Log(name + " TakeDamage Form " + instigator.name);
+                takeDamage.Invoke();
                 DeathCheack(instigator);                
             }
         }
