@@ -12,7 +12,19 @@ namespace RPG.Control
     {
         protected Mover mover;
         protected Health health;
-        protected Fighter fighter;
+        protected Fighter fighter = null;
+
+        public Fighter Fighter 
+        {
+            get 
+            {
+                if (!fighter)
+                {
+                    fighter = GetComponent<Fighter>();
+                }
+                return fighter;
+            }
+        }
 
         protected virtual void Awake()
         {

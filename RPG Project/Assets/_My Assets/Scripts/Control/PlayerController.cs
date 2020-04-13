@@ -80,7 +80,7 @@ namespace RPG.Control
             }
 
             //DOTO: try to Raycast once for all uses
-            if (InteractWithCombat()) { return; }
+            if (InteractWithComponent()) { return; }
             if (InteractWithMovement()) { return; }
 
             SetCursor(CursorType.None);
@@ -96,28 +96,24 @@ namespace RPG.Control
             return false;
         }
 
-        bool InteractWithCombat()
+        bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(MouseRay);
-            foreach (RaycastHit hitInfo in hits)
+            RaycastHit[] hitsInfo = Physics.RaycastAll(MouseRay);
+            for (int index1 = 0; index1 < hitsInfo.Length; index1++)
             {
-                //Debug.Log("print from InteractWithCombat() the hitInfo of " + hitInfo.transform.gameObject.name);
-                CombatTarget target = hitInfo.transform.GetComponent<CombatTarget>();
-                if (!fighter.CanAttack(target)) continue;
-
-                if (Input.GetMouseButton(0))
+                IRaycastable[] raycastables = hitsInfo[index1].transform.GetComponents<IRaycastable>();
+                for (int index2 = 0; index2 < raycastables.Length; index2++)
                 {
-                    actionScheduler.StartAction(fighter);//OR mover.StopMoving();????
-                    fighter.Attack(target);
-                    //TODO: I want that myAnimator.TriggerAttack() be here, not in fighter.
+                    if (raycastables[index2].HandleRaycast(this))
+                    {
+                        SetCursor(CursorType.Combat);
+                        return true;
+                    }
                 }
-                SetCursor(CursorType.Combat);
-                return true;
-            }
-
+            }            
             return false;
         }
-
+        
         bool InteractWithMovement()
         {           
             RaycastHit hitInfo;           
