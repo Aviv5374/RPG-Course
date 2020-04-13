@@ -169,22 +169,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec182ee200d5a94ba0e6e7339827066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: -1
-  regenerationPercentage: 70
-  takeDamage:
+  takeDamageEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7184894491382068828}
         m_MethodName: Spawn
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 111
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  healthPoints: -1
+  regenerationPercentage: 70
 --- !u!114 &3887199434522490467
 MonoBehaviour:
   m_ObjectHideFlags: 0

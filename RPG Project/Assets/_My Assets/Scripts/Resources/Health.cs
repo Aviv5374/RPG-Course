@@ -14,9 +14,16 @@ namespace RPG.Resources
 {
     public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
+        [System.Serializable]
+        class TakeDamageEvent : UnityEvent<float>
+        {
+        }
+
+        public event Action takeDamageDelegate;
+
+        [SerializeField] TakeDamageEvent takeDamageEvent;
         [SerializeField] float healthPoints = -1;
         [SerializeField] float regenerationPercentage = 70;
-        [SerializeField] UnityEvent takeDamage;
 
         LazyValue<float> healthPointsLazyValue;
 
@@ -116,7 +123,8 @@ namespace RPG.Resources
             {
                 HealthPoints = Mathf.Max(HealthPoints - damage, 0);
                 //Debug.Log(name + " TakeDamage Form " + instigator.name);
-                takeDamage.Invoke();
+                takeDamageEvent.Invoke(damage);
+                //takeDamageDelegate();
                 DeathCheack(instigator);                
             }
         }

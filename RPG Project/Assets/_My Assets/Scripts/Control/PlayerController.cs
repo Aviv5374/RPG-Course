@@ -50,6 +50,12 @@ namespace RPG.Control
             base.OnEnable();
             health.onDeathTest += PlayerDeathTest;
             //health.onDeathTest += DeathTest;
+            //health.takeDamage += DamageTest;
+        }
+
+        void DamageTest(float LOL)
+        {
+
         }
 
         protected override void Start()
