@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Characters.Player;
 using RPG.Resources;
-using System;
 
 namespace RPG.Control
 {
@@ -22,6 +23,7 @@ namespace RPG.Control
         }
 
         [SerializeField] CursorMapping[] cursorMappings = null;
+        [SerializeField] float maxNavMeshProjectionDistance = 1f;
 
         Camera mainCamera;
         
@@ -119,20 +121,37 @@ namespace RPG.Control
         }
 
         bool InteractWithMovement()
-        {           
-            RaycastHit hitInfo;           
-            bool hasHit = Physics.Raycast(MouseRay, out hitInfo);
+        {
+            Vector3 target;
+            bool hasHit = RaycastNavMesh(out target);
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
                     actionScheduler.StartAction(mover);//OR fighter.CancelAttack();                     
-                    mover.StartMoveAction(hitInfo.point);
+                    mover.StartMoveAction(target);
                 }
                 SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        bool RaycastNavMesh(out Vector3 target)
+        {
+            target = new Vector3();
+
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(MouseRay, out hit);
+            if (!hasHit) return false;
+
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(
+                hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+            if (!hasCastToNavMesh) return false;
+
+            target = navMeshHit.position;
+            return true;
         }
 
         void SetCursor(CursorType type)
