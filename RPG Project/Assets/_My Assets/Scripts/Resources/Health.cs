@@ -13,8 +13,9 @@ namespace RPG.Resources
 {
     public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
-        [SerializeField] LazyValue<float> healthPoints;
+        [SerializeField] float healthPoints = -1;
         [SerializeField] float regenerationPercentage = 70;
+        LazyValue<float> healthPointsLazyValue;
         CharacterAnimatorHandler myAnimator;
         ActionScheduler actionScheduler;
         BaseStats myBaseStats;
@@ -34,9 +35,16 @@ namespace RPG.Resources
 
         public float HealthPoints 
         { 
-            get { return healthPoints.value; } 
+            get { return healthPoints; } 
 
-            private set { healthPoints.value = value; }
+            private set { healthPoints = value; }
+        }
+
+        public float HealthPointsLazyValue
+        {
+            get { return healthPointsLazyValue.value; }
+
+            private set { healthPointsLazyValue.value = value; }
         }
 
         public bool IsAlive { get { return HealthPoints > 0; } }//????
@@ -50,7 +58,7 @@ namespace RPG.Resources
         void Awake()
         {
             SetComponent();
-            healthPoints = new LazyValue<float>(RegenerateFullHealth);
+            healthPointsLazyValue = new LazyValue<float>(RegenerateFullHealth);
         }
 
         void OnEnable()
@@ -60,7 +68,11 @@ namespace RPG.Resources
 
         void Start()
         {
-            healthPoints.ForceInit();
+            if (HealthPoints < 0)
+            {
+                HealthPoints = MaxHealthPoints;
+            }
+            healthPointsLazyValue.ForceInit();
         }
 
         void OnDisable()
