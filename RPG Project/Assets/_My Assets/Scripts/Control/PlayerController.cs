@@ -11,16 +11,7 @@ using RPG.Resources;
 namespace RPG.Control
 {
     public class PlayerController : CharacterController
-    {
-        enum CursorType
-        {
-            None,
-            Movement,
-            Combat,
-            Dead,
-            UI,
-        }
-
+    {        
         [System.Serializable]
         struct CursorMapping
         {
@@ -106,7 +97,7 @@ namespace RPG.Control
                 {
                     if (raycastables[index2].HandleRaycast(this))
                     {
-                        SetCursor(CursorType.Combat);
+                        SetCursor(raycastables[index2].GetCursorType());
                         return true;
                     }
                 }
