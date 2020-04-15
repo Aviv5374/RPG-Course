@@ -2,23 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Control;
+using RPG.Combat;
 
-namespace RPG.Combat
+namespace RPG.Attributes
 {
-    public class WeaponPickup : Pickup
+    public class HealthPickup : Pickup
     {
-        [SerializeField] Weapon weapon = null;        
-
-
-
+        [SerializeField] float healthToRestore = 0;
+                
         protected override void InvokePickup(PlayerController player)
         {
-            player.Fighter.EquipWeapon(weapon);
+            player.GetComponent<Health>().Heal(healthToRestore);
             base.InvokePickup(player);
         }
-
-
-
-
     }
 }
