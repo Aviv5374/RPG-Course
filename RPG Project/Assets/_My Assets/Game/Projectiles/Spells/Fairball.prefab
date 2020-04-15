@@ -4819,6 +4819,16 @@ PrefabInstance:
       propertyPath: lifeAfterImpact
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3250044880835014348, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c4a6d3173c94d04c9896a4afd752f69, type: 3}
+    - target: {fileID: 4110262160818544909, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: da0093ebe4323b846a8f67e40229df09, type: 3}
     - target: {fileID: 4633454027184206632, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4873,6 +4883,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747799308441664878, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6930654499115798727, guid: 8fe2d26f4a7c9f04ca3949c0e87de520,
         type: 3}

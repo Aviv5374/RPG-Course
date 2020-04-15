@@ -20,8 +20,9 @@ namespace RPG.Attributes
         }
 
         public event Action takeDamageDelegate;
-
+        
         [SerializeField] TakeDamageEvent takeDamageEvent;
+        [SerializeField] UnityEvent onDie;
         [SerializeField] float healthPoints = -1;
         [SerializeField] float regenerationPercentage = 70;
 
@@ -125,6 +126,10 @@ namespace RPG.Attributes
                 HealthPoints = Mathf.Max(HealthPoints - damage, 0);
                 //Debug.Log(name + " TakeDamage Form " + instigator.name);
                 takeDamageEvent.Invoke(damage);
+                if (IsDead)
+                {
+                    onDie.Invoke();
+                }
                 //takeDamageDelegate();
                 DeathCheack(instigator);                
             }
