@@ -113,6 +113,7 @@ namespace RPG.Combat
                 }
                 else 
                 {
+                    currentWeapon.WeaponPrefab.OnHit();
                     TargetHealth.TakeDamage(gameObject, damage);
                 }
             }            

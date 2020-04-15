@@ -11,7 +11,7 @@ namespace RPG.Combat
 	{
 		const string weaponName = "Weapon";
 
-		[SerializeField] WeaponPrefab weaponPrefab = null;//OR [SerializeField] GameObject equippedPrefab = null;
+		[SerializeField] WeaponPrefab weaponPrefab = null;
 		[SerializeField] Projectile projectile = null;
 		[SerializeField] float damage = 5f;
 		[SerializeField] float range = 2f;
@@ -21,7 +21,8 @@ namespace RPG.Combat
 		//if is a character with 3 hand or more it need to be an enum
 		//What happens if the character has less than two hands? And do you get into a minus hands?
 		[SerializeField] bool isRightHanded = true;
-		
+
+		public WeaponPrefab WeaponPrefab{ get { return weaponPrefab; } }
 		public float Damage { get => damage;}
 		public float Range { get => range;}
 		public float PercentageBonus { get => percentageBonus;}

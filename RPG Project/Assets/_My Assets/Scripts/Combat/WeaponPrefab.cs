@@ -6,6 +6,9 @@ namespace RPG.Combat
 {
     public class WeaponPrefab : MonoBehaviour
     {
-      
+       public void OnHit()
+       {
+
+       }
     }
 }
