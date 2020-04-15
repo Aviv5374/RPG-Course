@@ -29,24 +29,24 @@ namespace RPG.SceneManagement
             print("Faded in");
         }
 
-        public IEnumerator FadeOut(float time)
+        public Coroutine FadeOut(float time)
         {
             return Fade(1, time);
         }
 
-        public IEnumerator FadeIn(float time)
+        public Coroutine FadeIn(float time)
         {
             return Fade(0, time);
         }
 
-        IEnumerator Fade(float target, float time)
+        Coroutine Fade(float target, float time)
         {
             if (currentActiveFade != null)
             {
                 StopCoroutine(currentActiveFade);
             }
             currentActiveFade = StartCoroutine(FadeRoutine(target, time));
-            yield return currentActiveFade;
+            return currentActiveFade;
         }
 
         IEnumerator FadeRoutine(float target, float time)

@@ -41,6 +41,8 @@ namespace RPG.SceneManagement
 
             DontDestroyOnLoad(gameObject);
             Fader fader = FindObjectOfType<Fader>();
+            PlayerController player = FindObjectOfType<PlayerController>();
+            player.enabled = false;
 
             yield return fader.FadeOut(fadeOutTime);
 
@@ -48,6 +50,8 @@ namespace RPG.SceneManagement
             wrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            PlayerController newPlayer = FindObjectOfType<PlayerController>();
+            newPlayer.enabled = false;
 
             wrapper.Load();
 
@@ -56,7 +60,8 @@ namespace RPG.SceneManagement
             yield return new WaitForSeconds(fadeWaitTime);
             wrapper.ResetPlayerCamera();
             wrapper.Save();
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
+            newPlayer.enabled = true;
 
             Destroy(gameObject);
         }
