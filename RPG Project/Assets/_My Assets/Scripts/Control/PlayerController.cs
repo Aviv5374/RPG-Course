@@ -34,6 +34,18 @@ namespace RPG.Control
 
         Ray MouseRay { get { return mainCamera.ScreenPointToRay(Input.mousePosition); } }
 
+        public ActionScheduler ActionScheduler
+        {
+            get
+            {
+                if (!actionScheduler)
+                {
+                    actionScheduler = GetComponent<ActionScheduler>();
+                }
+                return actionScheduler;
+            }
+        }
+
         public CombatTarget CombatTarget { get { return myCombatTarget; } }
 
         protected override void Awake()
@@ -137,7 +149,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
-                    actionScheduler.StartAction(mover);//OR fighter.CancelAttack();                     
+                    actionScheduler.StartAction(mover);//OR fighter.CancelAttack();                   
                     mover.StartMoveAction(target);
                 }
                 SetCursor(CursorType.Movement);

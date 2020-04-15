@@ -107,13 +107,16 @@ namespace RPG.Combat
             {
                 float damage = myBaseStats.GetStat(Stat.Damage);
 
+                if (currentWeapon.WeaponPrefab)
+                {
+                    currentWeapon.WeaponPrefab.OnHit();
+                }
                 if (currentWeapon.HasProjectile)
                 {
                     currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, TargetHealth, gameObject, damage);
                 }
                 else 
                 {
-                    currentWeapon.WeaponPrefab.OnHit();
                     TargetHealth.TakeDamage(gameObject, damage);
                 }
             }            

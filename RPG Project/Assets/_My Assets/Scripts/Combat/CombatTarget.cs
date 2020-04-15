@@ -24,6 +24,7 @@ namespace RPG.Combat
 
             if (Input.GetMouseButton(0))
             {
+                callingController.ActionScheduler.StartAction(callingController.Fighter);
                 callingController.Fighter.Attack(this);
             }
 
