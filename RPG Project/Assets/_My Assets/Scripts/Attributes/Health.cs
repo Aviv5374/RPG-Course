@@ -10,7 +10,7 @@ using RPG.Saving;
 using RPG.My.Saving;
 using RPG.Stats;
 
-namespace RPG.Resources
+namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable, IMySaveable
     {
@@ -61,7 +61,8 @@ namespace RPG.Resources
         public bool IsAlive { get { return HealthPoints > 0; } }//????
         public bool IsDead { get { return HealthPoints <= 0; } }//????
         public float MaxHealthPoints { get { return myBaseStats.GetStat(Stat.Health); } }
-        public float HealthPercentage { get { return 100 * (HealthPoints / MaxHealthPoints); } }
+        public float HealFraction { get { return HealthPoints / MaxHealthPoints; } }
+        public float HealthPercentage { get { return 100 * HealFraction; } }
         float RegenHealthPoints { get { return MaxHealthPoints * (regenerationPercentage / 100); } }
 
         public event Action onDeathTest;

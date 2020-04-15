@@ -5,7 +5,7 @@ using RPG.Movement;
 using RPG.Core;
 using RPG.Characters;
 using RPG.My.Saving;
-using RPG.Resources;
+using RPG.Attributes;
 using RPG.Stats;
 
 namespace RPG.Combat
@@ -73,7 +73,7 @@ namespace RPG.Combat
 
         void SetupWeapon(string weaponName)
         {
-            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
+            Weapon weapon = Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
         }
 

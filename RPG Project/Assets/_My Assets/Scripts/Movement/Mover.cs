@@ -7,7 +7,7 @@ using RPG.Core;
 using RPG.Characters;
 using RPG.Saving;
 using RPG.My.Saving;
-using RPG.Resources;
+using RPG.Attributes;
 
 namespace RPG.Movement
 {

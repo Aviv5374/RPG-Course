@@ -14053,7 +14053,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468275783}
-  m_LocalRotation: {x: 0.06783575, y: 0.9221814, z: -0.33032602, w: 0.1893792}
+  m_LocalRotation: {x: 0.06783574, y: 0.9221814, z: -0.33032602, w: 0.18937917}
   m_LocalPosition: {x: -7.03, y: 13.09, z: 35.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -32507,6 +32507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rpgpp_lt_wood_path_01a
       objectReference: {fileID: 0}
+    - target: {fileID: 1839786891944690, guid: c96016c34e7be62488e588470988ef5b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4208458315195486, guid: c96016c34e7be62488e588470988ef5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.33
@@ -37135,7 +37139,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488194846}
-  m_LocalRotation: {x: 0.0731387, y: -0.9235824, z: 0.2225757, w: 0.30349052}
+  m_LocalRotation: {x: 0.07313872, y: -0.9235823, z: 0.22257574, w: 0.30349055}
   m_LocalPosition: {x: -8.196002, y: 43.50921, z: 25.689896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -48850,6 +48854,10 @@ PrefabInstance:
     - target: {fileID: 1789117675568830, guid: c77201b26fc729742973d2d4e601743f, type: 3}
       propertyPath: m_Name
       value: SM_Generic_Small_Rocks_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789117675568830, guid: c77201b26fc729742973d2d4e601743f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4166737424974280, guid: c77201b26fc729742973d2d4e601743f, type: 3}
       propertyPath: m_LocalPosition.x

@@ -8,7 +8,7 @@ using RPG.Movement;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Characters.Player;
-using RPG.Resources;
+using RPG.Attributes;
 
 namespace RPG.Control
 {
