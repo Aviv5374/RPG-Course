@@ -15,6 +15,7 @@ namespace RPG.Control
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 0.51f;
         [SerializeField] float waypointDwellTime = 2.75f;
+        [SerializeField] float shoutDistance = 5f;
 
         PlayerController player;
         Mover mover;
@@ -110,6 +111,20 @@ namespace RPG.Control
             timeSinceLastSawPlayer = 0;
             //Debug.Log(name + " can chase player!!!");
             fighter.Attack(player.CombatTarget, false, true);
+
+            AggrevateNearbyEnemies();
+        }
+
+        void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hitsInfo = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            for(int i=0; i< hitsInfo.Length; i++)
+            {
+                AIController AI = hitsInfo[i].transform.GetComponent<AIController>();
+                if (AI == null) continue;
+
+                AI.Aggrevate();
+            }
         }
 
         void SuspicionBehaviour()
