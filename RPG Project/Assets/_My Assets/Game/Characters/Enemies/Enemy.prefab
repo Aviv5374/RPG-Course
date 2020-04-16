@@ -26,6 +26,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 4.25
   suspicionTime: 3.5
+  agroCooldownTime: 5
   patrolPath: {fileID: 0}
   waypointTolerance: 0.5
   waypointDwellTime: 2.75
@@ -49,7 +50,7 @@ PrefabInstance:
     - target: {fileID: 5643213856356540021, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5643213856356540021, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
@@ -118,8 +119,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}
+      propertyPath: takeDamageEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
       propertyPath: health
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 4779828702506537700}
+    - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Aggrevate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7280176543374492583, guid: e4810c451e0357946b8dea19253ab382,
+        type: 3}
+      propertyPath: takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7962445579075578291, guid: e4810c451e0357946b8dea19253ab382,
         type: 3}

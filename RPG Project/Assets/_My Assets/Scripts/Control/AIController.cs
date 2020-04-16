@@ -11,6 +11,7 @@ namespace RPG.Control
     {
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 3.5f;
+        [SerializeField] float agroCooldownTime = 5f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 0.51f;
         [SerializeField] float waypointDwellTime = 2.75f;
@@ -23,10 +24,13 @@ namespace RPG.Control
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceArrivedAtGuardPos = Mathf.Infinity;
+        float timeSinceAggrevated = Mathf.Infinity;
         int currentWaypointIndex = 0;
 
         float DistanceFromPlayer { get { return Vector3.Distance(this.transform.position, player.transform.position); } }
+        bool IsAggrevated { get { return timeSinceAggrevated < agroCooldownTime; } }
         bool InAttackRangeOfPlayer { get { return DistanceFromPlayer <= chaseDistance; } }
+        bool IsAttackIsTrigger { get { return IsAggrevated || InAttackRangeOfPlayer; } }
         Vector3 CurrentWaypoint { get { return patrolPath.GetWayPointPos(currentWaypointIndex); } }
         bool IfLoseSightOfPlayer { get { return timeSinceLastSawPlayer < suspicionTime; } }
         bool OnGuardDuty { get { return AtGuardPosition() && timeSinceArrivedAtGuardPos < waypointDwellTime; } }
@@ -65,7 +69,7 @@ namespace RPG.Control
 
         void MainBehavior()
         {
-            if (InAttackRangeOfPlayer && fighter.CanAttack(player.CombatTarget))
+            if (IsAttackIsTrigger && fighter.CanAttack(player.CombatTarget))
             {
                 AttackBehaviour();
 
@@ -89,10 +93,16 @@ namespace RPG.Control
             UpdateTimers();
         }
 
+        public void Aggrevate()
+        {
+            timeSinceAggrevated = 0;
+        }
+
         void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSinceArrivedAtGuardPos += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
         void AttackBehaviour()
@@ -117,7 +127,6 @@ namespace RPG.Control
 
         void PotrolBehaviour()
         {
-
             if (AtGuardPosition())
             {
                 CycleWaypoint();
