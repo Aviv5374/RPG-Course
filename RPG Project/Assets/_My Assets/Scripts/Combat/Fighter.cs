@@ -132,8 +132,13 @@ namespace RPG.Combat
         public bool CanAttack(CombatTarget combatTarget)
         {
             if (!combatTarget) { return false; }
-            if (!mover.CanMoveTo(combatTarget.transform.position)) return false;
-            Health targetHealth = combatTarget.GetComponent<Health>();
+            target = combatTarget.transform;
+            if (!mover.CanMoveTo(target.position) && !IsInRange) 
+            {
+                ResetTarget();
+                return false; 
+            }
+            targetHealth = combatTarget.GetComponent<Health>();
             string targetName = combatTarget.name;            
             return targetHealth && targetHealth.HealthPoints > 0/*OR targetHealth.IsAlive?????*/ && targetName != this.name;
         }
@@ -143,8 +148,8 @@ namespace RPG.Combat
         {
             //Debug.Log("Take that you short, squat peasant!");
             //actionScheduler.StartAction(this);
-            target = combatTarget.transform;
-            targetHealth = combatTarget.GetComponent<Health>();
+            //target = combatTarget.transform;
+            //targetHealth = combatTarget.GetComponent<Health>();
             myAnimator.ResetStopAttackTrigger();
             this.isInjured = isInjured;
             this.isChasing = isChasing;
