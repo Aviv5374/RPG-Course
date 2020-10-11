@@ -131,7 +131,7 @@ namespace RPG.Combat
 
         public bool CanAttack(CombatTarget combatTarget)
         {
-            if (!combatTarget) { return false; }
+            if (!combatTarget || combatTarget.gameObject == this.gameObject) { return false; }
             if (!mover.CanMoveTo(combatTarget.transform.position) && !IsInRange) 
             {
                 ResetTarget();
