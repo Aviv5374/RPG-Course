@@ -132,15 +132,13 @@ namespace RPG.Combat
         public bool CanAttack(CombatTarget combatTarget)
         {
             if (!combatTarget) { return false; }
-            target = combatTarget.transform;
-            if (!mover.CanMoveTo(target.position) && !IsInRange) 
+            if (!mover.CanMoveTo(combatTarget.transform.position) && !IsInRange) 
             {
                 ResetTarget();
                 return false; 
             }
-            targetHealth = combatTarget.GetComponent<Health>();
-            string targetName = combatTarget.name;            
-            return targetHealth && targetHealth.HealthPoints > 0/*OR targetHealth.IsAlive?????*/ && targetName != this.name;
+            Health healthCheack = combatTarget.GetComponent<Health>();                        
+            return healthCheack && healthCheack.HealthPoints > 0/*OR targetHealth.IsAlive?????*/ && combatTarget.name != this.name;
         }
 
         //Right now only enemies are chasing the player, what if something else is chasing her?        
@@ -148,8 +146,8 @@ namespace RPG.Combat
         {
             //Debug.Log("Take that you short, squat peasant!");
             //actionScheduler.StartAction(this);
-            //target = combatTarget.transform;
-            //targetHealth = combatTarget.GetComponent<Health>();
+            target = combatTarget.transform;
+            targetHealth = combatTarget.GetComponent<Health>();
             myAnimator.ResetStopAttackTrigger();
             this.isInjured = isInjured;
             this.isChasing = isChasing;
