@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RPG.Characters.Player.PlayerAnimatorHandler">
+    <Position X="3.25" Y="8.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\_My Assets\Scripts\Characters\Player\PlayerAnimatorHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Characters.CharacterAnimatorHandler">
+    <Position X="3.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAABCAAAAAAAAAAAAAAAAAICFA=</HashCode>
+      <FileName>Assets\_My Assets\Scripts\Characters\CharacterAnimatorHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Characters.AnimatorHandler">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAABQAAAAACAABAAAAAEA=</HashCode>
+      <FileName>Assets\_My Assets\Scripts\Characters\AnimatorHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG.Control.PlayerController">
+    <Position X="8.5" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="RPG.Control.PlayerController.CursorMapping" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_My Assets\Scripts\Control\PlayerController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AEQAQQgCACAAAAIAACIARAQggAAAUAkIAAEAAAEAKEA=</HashCode>
+      <FileName>Assets\_My Assets\Scripts\Control\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
